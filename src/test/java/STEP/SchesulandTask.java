@@ -10,7 +10,6 @@ public class SchesulandTask {
      List<Map<String, String>> chefData;
     String taskType;
     String assignedChefName;
-
     @Given("the following chefs exist:")
     public void the_following_chefs_exist(io.cucumber.datatable.DataTable dataTable) {
         chefData = dataTable.asMaps();
