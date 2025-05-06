@@ -14,7 +14,7 @@ public class SchesulandTask {
     @Given("the following chefs exist:")
     public void the_following_chefs_exist(io.cucumber.datatable.DataTable dataTable) {
         chefData = dataTable.asMaps();
-        // intentionally ignore data to cause failure later
+        chefData.clear();
     }
 
     @Given("a task of type {string}")
@@ -24,13 +24,12 @@ public class SchesulandTask {
 
     @When("the task is assigned to a chef")
     public void the_task_is_assigned_to_a_chef() {
-        // simulate missing logic by assigning null
         assignedChefName = null;
     }
 
     @When("the task is assigned to {string}")
     public void the_task_is_assigned_to_specific(String chefName) {
-        assignedChefName = null; // fail intentionally
+        assignedChefName = null;
     }
 
     @Then("the task should be assigned to {string}")
@@ -42,12 +41,12 @@ public class SchesulandTask {
     @Then("{string} should have the task in their task list")
     public void chef_should_have_the_task(String chefName) {
         List<String> fakeTaskList = new ArrayList<>();
-        assertTrue(fakeTaskList.contains(taskType), "Task not found in chef's task list (intentional fail)");
+        assertTrue(fakeTaskList.contains(taskType), "Task not found in chef's task list");
     }
 
     @Then("{string} should be notified about the task")
     public void chef_should_be_notified(String chefName) {
-        boolean notified = false; // fake result
-        assertTrue(notified, "Chef was not notified (expected fail)");
+        boolean notified = false;
+        assertTrue(notified, "Chef was not notified");
     }
 }
