@@ -52,11 +52,13 @@ public class SchesulandTask {
 
     @Then("{string} should have the task in their task list")
     public void chef_should_have_the_task(String chefName) {
-        fail("Not implemented yet");
+        List<String> fakeTaskList = new ArrayList<>();
+        assertTrue(fakeTaskList.contains(taskType), "Task not found in chef's task list");
     }
 
     @Then("{string} should be notified about the task")
     public void chef_should_be_notified(String chefName) {
-        fail("Not implemented yet");
+        boolean notified = false;
+        assertTrue(notified, "Chef was not notified");
     }
 }
