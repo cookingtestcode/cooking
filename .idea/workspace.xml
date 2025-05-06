@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b11d567a-1096-4f3c-bd67-4219e6e11b90" name="Changes" comment="feature2" />
+    <list default="true" id="b11d567a-1096-4f3c-bd67-4219e6e11b90" name="Changes" comment="feature3" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +34,12 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="fatima" />
@@ -58,7 +64,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;fatima&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/Downloads/soft_cooging&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/Desktop/sof_cooking/src/test/java/STEP&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -139,7 +145,9 @@
       <workItem from="1746554880598" duration="21000" />
       <workItem from="1746554916647" duration="156000" />
       <workItem from="1746555081762" duration="1645000" />
-      <workItem from="1746556799657" duration="1009000" />
+      <workItem from="1746556799657" duration="1741000" />
+      <workItem from="1746559329066" duration="1735000" />
+      <workItem from="1746561399436" duration="359000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
