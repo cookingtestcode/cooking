@@ -14,10 +14,8 @@ public class CustomerProfile {
     private String allergy;
     private List<String> mealSuggestions = new ArrayList();
     private List<String> orderHistory = new ArrayList();
-
     public CustomerProfile() {
     }
-
     public void setDietaryPreference(String dietaryPreference) {
         this.dietaryPreference = dietaryPreference;
     }
