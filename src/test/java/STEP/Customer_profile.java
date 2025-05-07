@@ -27,15 +27,12 @@ public class Customer_profile {
     private List<String> mealSuggestions = new ArrayList();
     private List<String> pastMealOrders = new ArrayList();
     private List<String> currentOrder = new ArrayList();
-
     public Customer_profile() {
     }
-
     @Given("the customer has logged into their account")
     public void customerLoggedIn() {
         System.out.println(" Customer logged in.");
     }
-
     @When("they navigate to the preferences page")
     public void navigateToPreferencesPage() {
         System.out.println(" Navigating to preferences page.");
