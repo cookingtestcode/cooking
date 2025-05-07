@@ -17,7 +17,6 @@ public class OrderAndMenu {
     private String restrictedIngredient;
     private String appliedSubstitution;
     private boolean substitutionApplied = false;
-
     public OrderAndMenu() {
     }
 
