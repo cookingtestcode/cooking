@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b11d567a-1096-4f3c-bd67-4219e6e11b90" name="Changes" comment="feature3">
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/Chef.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/SchedulingandTaskManagement.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/SchedulingandTaskManagement.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +159,8 @@
       <workItem from="1746561399436" duration="359000" />
       <workItem from="1746562052214" duration="707000" />
       <workItem from="1746563053980" duration="218000" />
+      <workItem from="1746629562438" duration="4906000" />
+      <workItem from="1746700466084" duration="326000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />

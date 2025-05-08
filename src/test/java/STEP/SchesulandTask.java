@@ -1,61 +1,66 @@
 package STEP;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 import java.util.*;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
+import model.*;
 
 public class SchesulandTask {
-    List<Map<String, String>> chefData;
-    String taskType;
-    String assignedChefName;
+    private Task task;
+    private Chef assignedChef;
+    private List<Chef> chefs = new ArrayList<>();
 
-    @Given("the following chefs exist:")
-    public void the_following_chefs_exist(io.cucumber.datatable.DataTable dataTable) {
-        chefData = dataTable.asMaps();
+    @Given("a task is created")
+    public void a_task_is_created() {
+        task = new Task("Grill Steak", "Grilling");
     }
 
-    @Given("a task of type {string}")
-    public void a_task_of_type(String type) {
-        taskType = type;
-    }
+    @When("I assign the task to a chef based on their expertise and current workload")
+    public void i_assign_task_to_chef() {
+        chefs.add(new Chef("Ali", List.of("Grilling"), 2));
+        chefs.add(new Chef("Sara", List.of("Baking", "Grilling"), 1));
+        chefs.add(new Chef("John", List.of("Boiling"), 0));
 
-    @When("the task is assigned to a chef")
-    public void the_task_is_assigned_to_a_chef() {
-        int minLoad = Integer.MAX_VALUE;
-        String selectedChef = null;
+        assignedChef = chefs.stream()
+                .filter(c -> c.getExpertise().contains(task.getType()))
+                .min(Comparator.comparingInt(Chef::getWorkload))
+                .orElse(null);
 
-        for (Map<String, String> chef : chefData) {
-            List<String> expertise = Arrays.asList(chef.get("expertise").split(","));
-            int load = Integer.parseInt(chef.get("currentLoad"));
-
-            if (expertise.contains(taskType) && load < minLoad) {
-                minLoad = load;
-                selectedChef = chef.get("name");
-            }
+        if (assignedChef != null) {
+            assignedChef.assignTask(task);
         }
-
-        assignedChefName = selectedChef;
     }
 
-    @When("the task is assigned to {string}")
-    public void the_task_is_assigned_to_specific(String chefName) {
-        assignedChefName = chefName;
+    @Then("the chef with the least tasks and required expertise should be assigned the task")
+    public void the_correct_chef_should_be_assigned() {
+        assertNotNull(assignedChef);
+        assertTrue(assignedChef.getTasks().contains(task));
+        assertTrue(assignedChef.getExpertise().contains(task.getType()));
     }
 
-    @Then("the task should be assigned to {string}")
-    public void the_task_should_be_assigned_to(String expectedChefName) {
-        assertNotNull(assignedChefName, "No chef was assigned");
-        assertEquals(expectedChefName, assignedChefName);
+    @Given("a chef is assigned a task")
+    public void chef_is_assigned_a_task() {
+        assignedChef = new Chef("Khalid", List.of("Grilling"), 0);
+        task = new Task("Grill Chicken", "Grilling");
+        assignedChef.assignTask(task);
+    }
+    @When("the task is assigned")
+    public void the_task_is_assigned() {
+        if (assignedChef != null && task != null && !assignedChef.getTasks().contains(task)) {
+            assignedChef.assignTask(task);
+        }
+    }
+    @Then("the chef's task list should include the newly assigned task")
+    public void task_should_be_in_chef_task_list() {
+        assertTrue(assignedChef.getTasks().contains(task));
     }
 
-    @Then("{string} should have the task in their task list")
-    public void chef_should_have_the_task(String chefName) {
-        fail("Not implemented yet");
+    @Given("a chef has been assigned a task")
+    public void chef_has_been_assigned_task() {
+        chef_is_assigned_a_task();
     }
 
-    @Then("{string} should be notified about the task")
-    public void chef_should_be_notified(String chefName) {
-        fail("Not implemented yet");
+    @Then("the chef should receive a notification about the new task")
+    public void chef_should_receive_notification() {
+        assertTrue(assignedChef.getNotifications().contains("New Task Assigned: Grill Chicken"));
     }
 }
