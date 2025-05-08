@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 package model;
 
@@ -14,10 +10,8 @@ public class CustomerProfile {
     private String allergy;
     private List<String> mealSuggestions = new ArrayList();
     private List<String> orderHistory = new ArrayList();
-
     public CustomerProfile() {
     }
-
     public void setDietaryPreference(String dietaryPreference) {
         this.dietaryPreference = dietaryPreference;
     }
