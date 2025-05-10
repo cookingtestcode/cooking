@@ -1,24 +1,15 @@
-Feature: Scheduling and Task Management
+Feature: Task Scheduling and Assignment
 
-  As a kitchen manager,
-  I want to assign tasks to chefs based on their workload and expertise,
-  So that I can ensure balanced workloads and efficiency.
-
-  As a chef,
-  I want to receive notifications about my assigned cooking tasks,
-  So that I can prepare meals on time.
-
-  Scenario: Assign a task to a chef with appropriate expertise and the least workload
-    Given a task is created
-    When I assign the task to a chef based on their expertise and current workload
+  Scenario: Assign task to suitable chef
+    Given a task is created with deadline
+    When I assign the task to a chef based on their expertise, current workload, and deadline
     Then the chef with the least tasks and required expertise should be assigned the task
 
-  Scenario: Ensure the task is added to the chef's task list
-    Given a chef is assigned a task
+  Scenario: Verify task assignment to chef
+    Given a chef is assigned a task with deadline
     When the task is assigned
-    Then the chef's task list should include the newly assigned task
+    Then the chef's task list should include the newly assigned task with deadline
 
-  Scenario: Notify the chef about the task assignment
+  Scenario: Chef receives task notification
     Given a chef has been assigned a task
-    When the task is assigned
-    Then the chef should receive a notification about the new task
+    Then the chef should receive a notification about the new task with deadline
