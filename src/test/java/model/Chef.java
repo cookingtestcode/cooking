@@ -18,6 +18,10 @@ public class Chef {
             this.tasks.add(new Task("Task" + i, (String)expertise.get(0)));
         }
 
+
+    }
+    public void addNotification(String notification) {
+        notifications.add(notification);
     }
 
     public void assignTask(Task task) {

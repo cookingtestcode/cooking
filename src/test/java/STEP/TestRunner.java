@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/test/resources/Inventory_and_Supplier_Management.feature"},
+        features = {"src/test/resources"},
         glue = {"STEP"},
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )

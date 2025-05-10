@@ -4,17 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/STEP/Billing_System.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/BillingSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/BillingSystem.feature" afterDir="false" />
+    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/TestRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Chef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/CustomerProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Custome_Profile.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Custome_Profile.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/OrderAndMenu.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/OrderAndMenu.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Chef.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Task.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,10 +111,24 @@
       <workItem from="1746868608546" duration="2832000" />
       <workItem from="1746884175000" duration="107000" />
       <workItem from="1746884523656" duration="1364000" />
+      <workItem from="1746898197896" duration="1239000" />
     </task>
+    <task id="LOCAL-00001" summary="all without 6">
+      <option name="closed" value="true" />
+      <created>1746898325209</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746898325209</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="all without 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="all without 6" />
   </component>
 </project>

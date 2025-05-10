@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.ArrayList;
@@ -11,14 +10,16 @@ import java.util.Set;
 
 public class OrderAndMenu {
     private Menu menu;
-    private Set<String> selectedItems = new HashSet();
+    private Set<String> selectedItems = new HashSet<>();
     private CustomerProfile customerProfile;
     private Chef assignedChef;
-    private Set<String> availableIngredients = new HashSet();
-    private Set<String[]> incompatiblePairs = new HashSet();
-    private Map<String, String> substitutions = new HashMap();
+    private Set<String> availableIngredients = new HashSet<>();
+    private Set<String[]> incompatiblePairs = new HashSet<>();
+    private Map<String, String> substitutions = new HashMap<>();
     private String restrictedIngredient;
     private String appliedSubstitutionDetails;
+    private boolean substitutionApplied = false;
+    private String substitutionDetails;
 
     public OrderAndMenu(Menu menu) {
         this.menu = menu;
@@ -46,11 +47,9 @@ public class OrderAndMenu {
             if (this.assignedChef != null) {
                 this.assignedChef.getNotifications().add("New order item: " + itemName);
             }
-
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public boolean removeFromOrder(String itemName) {
@@ -59,29 +58,22 @@ public class OrderAndMenu {
 
     public double calculateTotal() {
         double total = 0.0;
-
-        String item;
-        for(Iterator var3 = this.selectedItems.iterator(); var3.hasNext(); total += this.menu.getItemPrice(item)) {
-            item = (String)var3.next();
+        for (String item : this.selectedItems) {
+            total += this.menu.getItemPrice(item);
         }
-
         return total;
     }
 
     public Set<String> getCurrentOrder() {
-        return new HashSet(this.selectedItems);
+        return new HashSet<>(this.selectedItems);
     }
 
     public void confirmOrder() {
         if (this.customerProfile != null) {
-            Iterator var1 = this.selectedItems.iterator();
-
-            while(var1.hasNext()) {
-                String item = (String)var1.next();
+            for (String item : this.selectedItems) {
                 this.customerProfile.addOrder(item);
             }
         }
-
         this.selectedItems.clear();
     }
 
@@ -98,25 +90,17 @@ public class OrderAndMenu {
 
     public boolean isValidMeal(String ing1, String ing2) {
         if (this.availableIngredients.contains(ing1) && this.availableIngredients.contains(ing2)) {
-            Iterator var3 = this.incompatiblePairs.iterator();
-
-            String[] pair;
-            do {
-                if (!var3.hasNext()) {
-                    if (this.customerProfile != null && (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {
-                        return false;
-                    }
-
-                    return true;
+            for (String[] pair : this.incompatiblePairs) {
+                if ((pair[0].equals(ing1) && pair[1].equals(ing2)) || (pair[0].equals(ing2) && pair[1].equals(ing1))) {
+                    return false;
                 }
-
-                pair = (String[])var3.next();
-            } while((!pair[0].equals(ing1) || !pair[1].equals(ing2)) && (!pair[0].equals(ing2) || !pair[1].equals(ing1)));
-
-            return false;
-        } else {
-            return false;
+            }
+            if (this.customerProfile != null && (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {
+                return false;
+            }
+            return true;
         }
+        return false;
     }
 
     public void setRestrictedIngredient(String ingredient) {
@@ -128,15 +112,15 @@ public class OrderAndMenu {
     }
 
     public String suggestSubstitution(String ingredient) {
-        return (String)this.substitutions.getOrDefault(ingredient, null);
+        return this.substitutions.getOrDefault(ingredient, null);
     }
 
     public void applySubstitution(String original, String substitute, Chef chef) {
-        if (this.substitutions.containsKey(original) && chef != null) {
-            this.appliedSubstitutionDetails = original + " -> " + substitute;
+        this.appliedSubstitutionDetails = original + " -> " + substitute;
+        this.substitutionApplied = true;
+        if (chef != null) {
             chef.getNotifications().add("Substitution Applied: " + this.appliedSubstitutionDetails);
         }
-
     }
 
     public String getSubstitutionDetails() {
@@ -144,6 +128,6 @@ public class OrderAndMenu {
     }
 
     public boolean isSubstitutionApplied() {
-        return this.appliedSubstitutionDetails != null;
+        return this.appliedSubstitutionDetails != null && this.substitutionApplied;
     }
 }
