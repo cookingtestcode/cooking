@@ -5,35 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/STEP/Billing_System.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/model/BillingSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/BillingSystem.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Customer_profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Customer_profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/InventoryStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/InventoryStepDefinitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Chef.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/CustomerProfile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/Custome_Profile.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Custome_Profile.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/Inventory_and_Supplier_Management.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Inventory_and_Supplier_Management.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/OrderAndMenu.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/OrderAndMenu.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/SchedulingandTaskManagement.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/SchedulingandTaskManagement.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Custome_Profile.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Custome_Profile.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/OrderAndMenu.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/OrderAndMenu.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Chef.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Task.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +29,18 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2ws5h7iIswOKjTTddNWJQbMvQAV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -66,7 +53,7 @@
     &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.TestRunner.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fatima2&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -76,6 +63,21 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="cooking" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="cooking" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,6 +97,8 @@
       <workItem from="1746817561247" duration="4008000" />
       <workItem from="1746822708807" duration="1873000" />
       <workItem from="1746868608546" duration="2832000" />
+      <workItem from="1746884175000" duration="107000" />
+      <workItem from="1746884523656" duration="1364000" />
     </task>
     <servers />
   </component>
