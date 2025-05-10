@@ -5,7 +5,6 @@ Feature: Order and Menu Customization
     When the customer selects ingredients "<selected_1>", "<selected_2>"
     Then the system should accept the meal as valid
 
-
   Scenario : Customer selects incompatible ingredients
     Given the incompatible ingredient pair is "<ing_1>" and "<ing_2>"
     When the customer selects ingredients "<ing_1>", "<ing_2>"
