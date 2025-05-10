@@ -1,44 +1,49 @@
 package model;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Chef {
     private String name;
     private List<String> expertise;
-    private List<Task> tasks = new ArrayList<>();
-    private List<String> notifications = new ArrayList<>();
+    private List<Task> tasks = new ArrayList();
+    private List<String> notifications = new ArrayList();
 
     public Chef(String name, List<String> expertise, int initialTasks) {
         this.name = name;
         this.expertise = expertise;
-        for (int i = 0; i < initialTasks; i++) {
-            tasks.add(new Task("Task" + i, expertise.get(0)));
+
+        for(int i = 0; i < initialTasks; ++i) {
+            this.tasks.add(new Task("Task" + i, (String)expertise.get(0)));
         }
+
     }
 
     public void assignTask(Task task) {
-        tasks.add(task);
-        notifications.add("New Task Assigned: " + task.getName() +
-                (task.getDeadline() != null ? " (Due: " + task.getDeadline() + ")" : ""));
+        this.tasks.add(task);
+        List var10000 = this.notifications;
+        String var10001 = task.getName();
+        var10000.add("New Task Assigned: " + var10001 + (task.getDeadline() != null ? " (Due: " + String.valueOf(task.getDeadline()) + ")" : ""));
     }
 
     public List<String> getExpertise() {
-        return expertise;
+        return this.expertise;
     }
 
     public int getWorkload() {
-        return tasks.size();
+        return this.tasks.size();
     }
 
     public List<Task> getTasks() {
-        return tasks;
+        return this.tasks;
     }
 
     public List<String> getNotifications() {
-        return notifications;
+        return this.notifications;
     }
 
     public Object getName() {
-        return name;
+        return this.name;
     }
 }

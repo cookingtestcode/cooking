@@ -1,13 +1,74 @@
+
+
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InventoryManager {
-    private final Map<String, Integer> inventory;
-    private final Map<String, Integer> lowStockThresholds;
-    private final Map<String, Integer> criticalStockLevels;
-    private final Map<String, Supplier> supplierDetails;
-    private final List<String> managerNotifications;
+    private final Map<String, Integer> inventory = new HashMap();
+    private final Map<String, Integer> lowStockThresholds = new HashMap();
+    private final Map<String, Integer> criticalStockLevels = new HashMap();
+    private final Map<String, Supplier> supplierDetails = new HashMap();
+    private final List<String> managerNotifications = new ArrayList();
+
+    public InventoryManager() {
+        this.initializeSampleData();
+    }
+
+    private void initializeSampleData() {
+        this.inventory.put("Cheese", 10);
+        this.inventory.put("Tomatoes", 10);
+        this.lowStockThresholds.put("Cheese", 5);
+        this.lowStockThresholds.put("Tomatoes", 5);
+        this.criticalStockLevels.put("Cheese", 2);
+        this.criticalStockLevels.put("Tomatoes", 2);
+        this.supplierDetails.put("Cheese", new Supplier("Cheese Supplier Inc.", "cheese@supplier.com"));
+        this.supplierDetails.put("Tomatoes", new Supplier("Tomato World", "tomato@supplier.com"));
+    }
+
+    public Map<String, Integer> getInventory() {
+        return new HashMap(this.inventory);
+    }
+
+    public void setIngredientStock(String ingredient, int quantity) {
+        this.inventory.put(ingredient, quantity);
+        if (this.isRestockSuggested(ingredient)) {
+            this.managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
+        }
+
+    }
+
+    public boolean isRestockSuggested(String ingredient) {
+        return (Integer)this.inventory.getOrDefault(ingredient, 0) <= (Integer)this.lowStockThresholds.getOrDefault(ingredient, 5);
+    }
+
+    public boolean isSupplierAPIConnected() {
+        return true;
+    }
+
+    public String fetchSupplierPrice(String ingredient) {
+        return this.supplierDetails.containsKey(ingredient) ? "$" + (10 + ingredient.length() % 5) + ".00" : null;
+    }
+
+    public boolean hasSupplierFor(String ingredient) {
+        return this.supplierDetails.containsKey(ingredient);
+    }
+
+    public boolean checkAndAutoOrder(String ingredient) {
+        if ((Integer)this.inventory.getOrDefault(ingredient, 0) < (Integer)this.criticalStockLevels.getOrDefault(ingredient, 2) && this.hasSupplierFor(ingredient)) {
+            this.managerNotifications.add("Auto-order placed for: " + ingredient);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<String> getManagerNotifications() {
+        return new ArrayList(this.managerNotifications);
+    }
 
     public static class Supplier {
         private String name;
@@ -19,74 +80,11 @@ public class InventoryManager {
         }
 
         public String getName() {
-            return name;
+            return this.name;
         }
 
         public String getEmail() {
-            return email;
+            return this.email;
         }
-    }
-
-    public InventoryManager() {
-        inventory = new HashMap<>();
-        lowStockThresholds = new HashMap<>();
-        criticalStockLevels = new HashMap<>();
-        supplierDetails = new HashMap<>();
-        managerNotifications = new ArrayList<>();
-        initializeSampleData();
-    }
-
-    private void initializeSampleData() {
-        inventory.put("Cheese", 10);
-        inventory.put("Tomatoes", 10);
-
-        lowStockThresholds.put("Cheese", 5);
-        lowStockThresholds.put("Tomatoes", 5);
-
-        criticalStockLevels.put("Cheese", 2);
-        criticalStockLevels.put("Tomatoes", 2);
-
-        supplierDetails.put("Cheese", new Supplier("Cheese Supplier Inc.", "cheese@supplier.com"));
-        supplierDetails.put("Tomatoes", new Supplier("Tomato World", "tomato@supplier.com"));
-    }
-
-    public Map<String, Integer> getInventory() {
-        return new HashMap<>(inventory);
-    }
-
-    public void setIngredientStock(String ingredient, int quantity) {
-        inventory.put(ingredient, quantity);
-        if (isRestockSuggested(ingredient)) {
-            managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
-        }
-    }
-
-    public boolean isRestockSuggested(String ingredient) {
-        return inventory.getOrDefault(ingredient, 0) <= lowStockThresholds.getOrDefault(ingredient, 5);
-    }
-
-    public boolean isSupplierAPIConnected() {
-        return true;
-    }
-
-    public String fetchSupplierPrice(String ingredient) {
-        return supplierDetails.containsKey(ingredient) ? "$" + (10 + ingredient.length() % 5) + ".00" : null;
-    }
-
-    public boolean hasSupplierFor(String ingredient) {
-        return supplierDetails.containsKey(ingredient);
-    }
-
-    public boolean checkAndAutoOrder(String ingredient) {
-        if (inventory.getOrDefault(ingredient, 0) < criticalStockLevels.getOrDefault(ingredient, 2)
-                && hasSupplierFor(ingredient)) {
-            managerNotifications.add("Auto-order placed for: " + ingredient);
-            return true;
-        }
-        return false;
-    }
-
-    public List<String> getManagerNotifications() {
-        return new ArrayList<>(managerNotifications);
     }
 }
