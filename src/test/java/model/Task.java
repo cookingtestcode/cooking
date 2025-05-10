@@ -1,12 +1,20 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public class Task {
     private String name;
     private String type;
+    private LocalDateTime deadline;
 
-    public Task(String name, String type) {
+    public Task(String name, String type, LocalDateTime deadline) {
         this.name = name;
         this.type = type;
+        this.deadline = deadline;
+    }
+
+    public Task(String name, String type) {
+        this(name, type, null);
     }
 
     public String getType() {
@@ -15,6 +23,10 @@ public class Task {
 
     public String getName() {
         return name;
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
     }
 
     @Override

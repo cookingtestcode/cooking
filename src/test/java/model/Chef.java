@@ -18,7 +18,8 @@ public class Chef {
 
     public void assignTask(Task task) {
         tasks.add(task);
-        notifications.add("New Task Assigned: " + task.getName());
+        notifications.add("New Task Assigned: " + task.getName() +
+                (task.getDeadline() != null ? " (Due: " + task.getDeadline() + ")" : ""));
     }
 
     public List<String> getExpertise() {
@@ -35,5 +36,9 @@ public class Chef {
 
     public List<String> getNotifications() {
         return notifications;
+    }
+
+    public Object getName() {
+        return name;
     }
 }

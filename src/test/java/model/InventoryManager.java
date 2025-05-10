@@ -1,22 +1,38 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class InventoryManager {
-
     private final Map<String, Integer> inventory;
     private final Map<String, Integer> lowStockThresholds;
     private final Map<String, Integer> criticalStockLevels;
-    private final Map<String, String> supplierDetails;
+    private final Map<String, Supplier> supplierDetails;
+    private final List<String> managerNotifications;
+
+    public static class Supplier {
+        private String name;
+        private String email;
+
+        public Supplier(String name, String email) {
+            this.name = name;
+            this.email = email;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+    }
 
     public InventoryManager() {
         inventory = new HashMap<>();
         lowStockThresholds = new HashMap<>();
         criticalStockLevels = new HashMap<>();
         supplierDetails = new HashMap<>();
-
-        // بيانات أولية تجريبية
+        managerNotifications = new ArrayList<>();
         initializeSampleData();
     }
 
@@ -30,32 +46,31 @@ public class InventoryManager {
         criticalStockLevels.put("Cheese", 2);
         criticalStockLevels.put("Tomatoes", 2);
 
-        supplierDetails.put("Cheese", "Cheese Supplier Inc.");
-        supplierDetails.put("Tomatoes", "Tomato World");
+        supplierDetails.put("Cheese", new Supplier("Cheese Supplier Inc.", "cheese@supplier.com"));
+        supplierDetails.put("Tomatoes", new Supplier("Tomato World", "tomato@supplier.com"));
     }
 
     public Map<String, Integer> getInventory() {
-        return inventory;
+        return new HashMap<>(inventory);
     }
 
     public void setIngredientStock(String ingredient, int quantity) {
         inventory.put(ingredient, quantity);
+        if (isRestockSuggested(ingredient)) {
+            managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
+        }
     }
 
     public boolean isRestockSuggested(String ingredient) {
-        int quantity = inventory.getOrDefault(ingredient, 0);
-        int threshold = lowStockThresholds.getOrDefault(ingredient, 5);
-        return quantity <= threshold;
+        return inventory.getOrDefault(ingredient, 0) <= lowStockThresholds.getOrDefault(ingredient, 5);
     }
 
     public boolean isSupplierAPIConnected() {
-        // تمثيل لاتصال ناجح بـ API المورد
         return true;
     }
 
     public String fetchSupplierPrice(String ingredient) {
-        // تمثيل لسعر تجريبي يعتمد على طول اسم المكون
-        return "$" + (2 + ingredient.length()) + ".00";
+        return supplierDetails.containsKey(ingredient) ? "$" + (10 + ingredient.length() % 5) + ".00" : null;
     }
 
     public boolean hasSupplierFor(String ingredient) {
@@ -63,12 +78,15 @@ public class InventoryManager {
     }
 
     public boolean checkAndAutoOrder(String ingredient) {
-        int quantity = inventory.getOrDefault(ingredient, 0);
-        int critical = criticalStockLevels.getOrDefault(ingredient, 2);
-        if (quantity < critical && hasSupplierFor(ingredient)) {
-            System.out.println("Purchase order sent to supplier for: " + ingredient);
+        if (inventory.getOrDefault(ingredient, 0) < criticalStockLevels.getOrDefault(ingredient, 2)
+                && hasSupplierFor(ingredient)) {
+            managerNotifications.add("Auto-order placed for: " + ingredient);
             return true;
         }
         return false;
+    }
+
+    public List<String> getManagerNotifications() {
+        return new ArrayList<>(managerNotifications);
     }
 }

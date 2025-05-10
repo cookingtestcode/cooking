@@ -1,17 +1,25 @@
-
 package model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CustomerProfile {
+    private String name;
     private String dietaryPreference;
     private String allergy;
-    private List<String> mealSuggestions = new ArrayList();
-    private List<String> orderHistory = new ArrayList();
+    private List<String> mealSuggestions = new ArrayList<>();
+    private List<String> orderHistory = new ArrayList<>();
+
     public CustomerProfile() {
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public void setDietaryPreference(String dietaryPreference) {
         this.dietaryPreference = dietaryPreference;
     }
@@ -38,41 +46,62 @@ public class CustomerProfile {
 
     public void generateMealSuggestions(List<String> availableMeals) {
         this.mealSuggestions.clear();
-        if (this.allergy != null) {
-            Iterator var2 = availableMeals.iterator();
-
-            while(var2.hasNext()) {
-                String meal = (String)var2.next();
-                if (!meal.toLowerCase().contains(this.allergy.toLowerCase())) {
-                    this.mealSuggestions.add(meal);
-                }
+        for (String meal : availableMeals) {
+            boolean matchesPreference = dietaryPreference == null || meal.toLowerCase().contains(dietaryPreference.toLowerCase());
+            boolean safeFromAllergy = allergy == null || !meal.toLowerCase().contains(allergy.toLowerCase());
+            if (matchesPreference && safeFromAllergy) {
+                this.mealSuggestions.add(meal);
             }
-        } else {
-            this.mealSuggestions.addAll(availableMeals);
         }
+    }
 
+    public List<String> suggestPersonalizedMeals() {
+        Map<String, Integer> mealFrequency = new HashMap<>();
+        for (String order : orderHistory) {
+            mealFrequency.put(order, mealFrequency.getOrDefault(order, 0) + 1);
+        }
+        List<String> personalizedSuggestions = new ArrayList<>();
+        mealFrequency.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .limit(3)
+                .forEach(e -> personalizedSuggestions.add(e.getKey()));
+        return personalizedSuggestions.isEmpty() ? mealSuggestions : personalizedSuggestions;
+    }
+
+    public Map<String, Integer> analyzeOrderTrends() {
+        Map<String, Integer> trends = new HashMap<>();
+        for (String order : orderHistory) {
+            trends.put(order, trends.getOrDefault(order, 0) + 1);
+        }
+        return trends;
     }
 
     public void addOrder(String meal) {
         if (meal != null && !meal.trim().isEmpty()) {
             this.orderHistory.add(meal);
         }
-
     }
 
     public void addMultipleOrders(List<String> meals) {
         if (meals != null) {
-            Iterator var2 = meals.iterator();
-
-            while(var2.hasNext()) {
-                String meal = (String)var2.next();
+            for (String meal : meals) {
                 this.addOrder(meal);
             }
         }
-
     }
 
     public void clearOrderHistory() {
         this.orderHistory.clear();
+    }
+
+    public List<String> getRecommendedItems(Menu menu) {
+        return menu.getFilteredMenu(this);
+    }
+    public boolean hasAllergy(String ingredient) {
+        return allergy != null && ingredient != null && ingredient.toLowerCase().contains(allergy.toLowerCase());
+    }
+    public void rateMenuItem(String itemName, int rating) {
+
+        System.out.println("Customer " + name + " rated " + itemName + " with " + rating + " stars");
     }
 }

@@ -1,83 +1,101 @@
-
 package STEP;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import model.OrderAndMenu;
+
+import io.cucumber.java.en.*;
+import model.*;
 import org.junit.Assert;
+import java.util.List;
 
 public class OrderANDMenu {
-    OrderAndMenu orderManager = new OrderAndMenu();
-    String suggestedSubstitution;
-    String originalIngredient;
-    String substituteIngredient;
-    boolean mealIsValid;
+    private OrderAndMenu orderManager;
+    private CustomerProfile customerProfile;
+    private Chef chef;
+    private String suggestedSubstitution;
+    private boolean mealIsValid;
 
-    public OrderANDMenu() {
+    @Given("the order system is initialized")
+    public void initializeOrderSystem() {
+        orderManager = new OrderAndMenu(new Menu());
+        customerProfile = new CustomerProfile();
+        chef = new Chef("Ali", List.of("Grilling"), 0);
+        orderManager.setCustomerProfile(customerProfile);
+        orderManager.assignChef(chef);
     }
 
     @Given("the available ingredients are {string}, {string}, {string}")
-    public void the_available_ingredients_are(String ing1, String ing2, String ing3) {
-        this.orderManager.setAvailableIngredients(new String[]{ing1, ing2, ing3});
+    public void setAvailableIngredients(String ing1, String ing2, String ing3) {
+        orderManager.setAvailableIngredients(ing1, ing2, ing3);
     }
 
-    @When("the customer selects ingredients {string}, {string}")
-    public void the_customer_selects_ingredients(String ing1, String ing2) {
-        this.mealIsValid = this.orderManager.isValidMeal(new String[]{ing1, ing2});
+    @Given("the customer has an allergy to {string}")
+    public void setCustomerAllergy(String allergy) {
+        customerProfile.setAllergy(allergy);
     }
 
-    @Then("the system should accept the meal as valid")
-    public void the_system_should_accept_the_meal_as_valid() {
-        Assert.assertTrue(this.mealIsValid);
-        System.out.println("Meal accepted.");
-    }
-
-    @Given("the incompatible ingredient pair is {string} and {string}")
-    public void the_incompatible_ingredient_pair_is(String ing1, String ing2) {
-        this.orderManager.setIncompatiblePair(ing1, ing2);
-    }
-
-    @Then("the system should reject the meal due to incompatibility")
-    public void the_system_should_reject_the_meal_due_to_incompatibility() {
-        Assert.assertFalse(this.mealIsValid);
+    @Given("the incompatible ingredient pairs are {string} and {string}, {string} and {string}")
+    public void setIncompatiblePairs(String pair1a, String pair1b, String pair2a, String pair2b) {
+        orderManager.addIncompatiblePair(pair1a, pair1b);
+        orderManager.addIncompatiblePair(pair2a, pair2b);
     }
 
     @Given("the ingredient {string} is restricted for the customer")
-    public void the_ingredient_is_restricted(String ingredient) {
-        this.orderManager.setRestrictedIngredient(ingredient);
+    public void setRestrictedIngredient(String ingredient) {
+        orderManager.setRestrictedIngredient(ingredient);
     }
 
-    @And("the system has a substitution {string} for {string}")
-    public void the_system_has_a_substitution(String substitute, String original) {
-        this.orderManager.addSubstitution(original, substitute);
-        this.originalIngredient = original;
-        this.substituteIngredient = substitute;
-    }
-
-    @When("the customer selects {string}")
-    public void the_customer_selects(String ingredient) {
-        this.suggestedSubstitution = this.orderManager.suggestSubstitution(ingredient);
-    }
-
-    @Then("the system should suggest {string}")
-    public void the_system_should_suggest(String expectedSubstitute) {
-        Assert.assertEquals(expectedSubstitute, this.suggestedSubstitution);
+    @Given("the system has a substitution {string} for {string}")
+    public void addSubstitution(String substitute, String original) {
+        orderManager.addSubstitution(original, substitute);
     }
 
     @Given("a substitution of {string} for {string} has been applied")
-    public void a_substitution_of_has_been_applied(String substitute, String original) {
-        this.orderManager.applySubstitution(original, substitute);
+    public void applySubstitution(String substitute, String original) {
+        orderManager.applySubstitution(original, substitute, chef);
+    }
+
+    @When("the customer selects ingredients {string}, {string}")
+    public void validateSelectedMeal(String ing1, String ing2) {
+        mealIsValid = orderManager.isValidMeal(ing1, ing2);
+    }
+
+    @When("the customer selects {string}")
+    public void suggestSubstitutionForIngredient(String ingredient) {
+        suggestedSubstitution = orderManager.suggestSubstitution(ingredient);
     }
 
     @When("the meal is finalized")
-    public void the_meal_is_finalized() {
-        Assert.assertTrue(this.orderManager.isSubstitutionApplied());
+    public void checkSubstitutionApplied() {
+        Assert.assertTrue("Substitution should be applied",
+                orderManager.isSubstitutionApplied());
+    }
+
+    @Then("the system should accept the meal as valid")
+    public void verifyMealIsValid() {
+        Assert.assertTrue("Meal should be valid", mealIsValid);
+    }
+
+    @Then("the system should reject the meal due to incompatibility")
+    public void verifyMealIsInvalidDueToIncompatibility() {
+        Assert.assertFalse("Meal should be invalid due to incompatibility", mealIsValid);
+    }
+
+    @Then("the system should reject the meal due to allergy")
+    public void verifyMealIsInvalidDueToAllergy() {
+        Assert.assertFalse("Meal should be invalid due to allergy", mealIsValid);
+    }
+
+    @Then("the system should suggest {string}")
+    public void verifySuggestedSubstitution(String expectedSubstitute) {
+        Assert.assertEquals("Suggested substitution should match",
+                expectedSubstitute, suggestedSubstitution);
     }
 
     @Then("the chef should be notified with the substitution details")
-    public void the_chef_should_be_notified() {
-        Assert.assertNotNull(this.orderManager.getSubstitutionDetails());
-        System.out.println("Chef notified: " + this.orderManager.getSubstitutionDetails());
+    public void verifyChefNotification() {
+        String substitutionDetails = orderManager.getSubstitutionDetails();
+        Assert.assertNotNull("Substitution details should not be null", substitutionDetails);
+
+        String expectedNotification = "Substitution Applied: " + substitutionDetails;
+        Assert.assertTrue("Chef should receive substitution notification",
+                chef.getNotifications().contains(expectedNotification));
     }
 }

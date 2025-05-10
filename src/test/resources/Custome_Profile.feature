@@ -10,7 +10,7 @@ Feature: Customer Profile Management
     And they add "<allergy>" as an allergy
     And they save their preferences
     Then the system should store the preferences successfully
-    And future meal suggestions should not include <allergy>
+    And future meal suggestions should not include "<allergy>"
 
   Scenario: Chef views customer dietary preferences
     Given the chef has access to the customer's profile
@@ -18,7 +18,7 @@ Feature: Customer Profile Management
     Then they should see that the customer is "<preference>"
     And they should be aware of the allergy to "<allergy>"
 
-  Scenario: Customer reorders a previouo3ws meal
+  Scenario: Customer reorders a previous meal
     Given the customer is viewing their past meal orders
     When they click on "Reorder" for a specific meal
     Then the system should add that meal to their current order
@@ -29,7 +29,6 @@ Feature: Customer Profile Management
     When they open the order history section
     Then they should see the customer's past meals
     And they should be able to suggest a personalized meal plan based on preferences and history
-
 
   Scenario: System admin stores customer order history
     Given the system administrator is logged in

@@ -1,7 +1,4 @@
 Feature: Inventory and Supplier Management
-  As a kitchen manager
-  I want to track stock levels, get restocking suggestions, and integrate with suppliers
-  So that I can ensure continuous operations and make cost-effective decisions
 
   Scenario: View current stock levels of ingredients
     Given the system has access to the inventory database
@@ -12,6 +9,7 @@ Feature: Inventory and Supplier Management
     Given an ingredient has reached its low stock threshold
     When the system checks inventory levels
     Then the system should suggest restocking that ingredient
+    And the kitchen manager should receive a low stock notification
 
   Scenario: Fetch real-time prices from suppliers
     Given the system is connected to supplier APIs
@@ -23,3 +21,4 @@ Feature: Inventory and Supplier Management
     And the system has supplier details for that ingredient
     When the system performs an inventory check
     Then a purchase order should be automatically generated and sent to the supplier
+    And the kitchen manager should receive an auto-order notification

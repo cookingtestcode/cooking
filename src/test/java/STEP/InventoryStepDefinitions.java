@@ -5,27 +5,24 @@ import io.cucumber.java.Before;
 import static org.junit.Assert.*;
 
 import model.InventoryManager;
-
 import java.util.Map;
 
 public class InventoryStepDefinitions {
-
     private InventoryManager inventoryManager;
     private Map<String, Integer> currentInventory;
     private String latestPrice;
     private boolean restockSuggested;
     private boolean purchaseOrderGenerated;
+    private String notification;
 
     @Before
     public void setUp() {
         inventoryManager = new InventoryManager();
     }
 
-    // -------------------- Inventory View --------------------
-
     @Given("the system has access to the inventory database")
     public void givenSystemHasAccessToInventory() {
-        assertNotNull("InventoryManager should be initialized", inventoryManager);
+        assertNotNull(inventoryManager);
     }
 
     @When("the kitchen manager views the inventory dashboard")
@@ -35,15 +32,13 @@ public class InventoryStepDefinitions {
 
     @Then("the current stock levels of all ingredients should be displayed in real time")
     public void thenInventoryShouldBeDisplayed() {
-        assertNotNull("Inventory data should not be null", currentInventory);
-        assertFalse("Inventory should not be empty", currentInventory.isEmpty());
+        assertNotNull(currentInventory);
+        assertFalse(currentInventory.isEmpty());
     }
-
-    // -------------------- Low Stock Threshold --------------------
 
     @Given("an ingredient has reached its low stock threshold")
     public void givenIngredientAtLowStock() {
-        inventoryManager.setIngredientStock("Cheese", 4); // Threshold is 5
+        inventoryManager.setIngredientStock("Cheese", 4);
     }
 
     @When("the system checks inventory levels")
@@ -53,14 +48,22 @@ public class InventoryStepDefinitions {
 
     @Then("the system should suggest restocking that ingredient")
     public void thenRestockShouldBeSuggested() {
-        assertTrue("Restocking should be suggested", restockSuggested);
+        assertTrue(restockSuggested);
     }
 
-    // -------------------- Supplier Pricing --------------------
+    @Then("the kitchen manager should receive a low stock notification")
+    public void managerReceivesNotification() {
+        notification = inventoryManager.getManagerNotifications().stream()
+                .filter(n -> n.contains("Cheese"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(notification);
+        assertTrue(notification.contains("Low stock alert"));
+    }
 
     @Given("the system is connected to supplier APIs")
     public void givenSystemConnectedToSuppliers() {
-        assertTrue("System should be connected to supplier API", inventoryManager.isSupplierAPIConnected());
+        assertTrue(inventoryManager.isSupplierAPIConnected());
     }
 
     @When("the kitchen manager checks ingredient pricing")
@@ -70,20 +73,18 @@ public class InventoryStepDefinitions {
 
     @Then("the system should display the latest prices from suppliers")
     public void thenShowLatestSupplierPrices() {
-        assertNotNull("Price should not be null", latestPrice);
-        assertTrue("Price should contain $", latestPrice.contains("$"));
+        assertNotNull(latestPrice);
+        assertTrue(latestPrice.contains("$"));
     }
-
-    // -------------------- Auto Ordering --------------------
 
     @Given("an ingredient is below the critical stock level")
     public void givenIngredientIsCriticallyLow() {
-        inventoryManager.setIngredientStock("Tomatoes", 1); // Critical is 2
+        inventoryManager.setIngredientStock("Tomatoes", 1);
     }
 
     @And("the system has supplier details for that ingredient")
     public void andSystemHasSupplierDetails() {
-        assertTrue("Supplier details must exist", inventoryManager.hasSupplierFor("Tomatoes"));
+        assertTrue(inventoryManager.hasSupplierFor("Tomatoes"));
     }
 
     @When("the system performs an inventory check")
@@ -93,6 +94,15 @@ public class InventoryStepDefinitions {
 
     @Then("a purchase order should be automatically generated and sent to the supplier")
     public void thenPurchaseOrderShouldBeGenerated() {
-        assertTrue("Purchase order should be generated", purchaseOrderGenerated);
+        assertTrue(purchaseOrderGenerated);
+    }
+
+    @Then("the kitchen manager should receive an auto-order notification")
+    public void thenManagerReceivesAutoOrderNotification() {
+        notification = inventoryManager.getManagerNotifications().stream()
+                .filter(n -> n.contains("Auto-order placed"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull("Auto-order notification should exist", notification);
     }
 }
