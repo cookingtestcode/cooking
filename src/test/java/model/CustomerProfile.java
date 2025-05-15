@@ -128,4 +128,11 @@ public class CustomerProfile {
     public void rateMenuItem(String itemName, int rating) {
         System.out.println("Customer " + this.name + " rated " + itemName + " with " + rating + " stars");
     }
+    public void scheduleMeal(LocalDateTime time) {
+    this.scheduledMealTime = time;
+    System.out.println("Meal scheduled for " + time);
+}
+    public LocalDateTime getMealDeliveryTime() {
+    return this.scheduledMealTime;
+}
 }
