@@ -87,18 +87,24 @@ public class InventoryManager {
             return this.email;
         }
     }
-    public void checkLowStockAndNotifyManager() {
+    public boolean checkLowStockAndNotifyManager() {
+    boolean actionTaken = false; 
+
     for (Map.Entry<String, Integer> entry : this.inventory.entrySet()) {
         String ingredient = entry.getKey();
         int quantity = entry.getValue();
 
         if (this.isRestockSuggested(ingredient)) {
             this.managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
+            actionTaken = true; 
         }
 
         if (this.checkAndAutoOrder(ingredient)) {
             this.managerNotifications.add("Critical stock alert: Auto-order placed for " + ingredient);
+            actionTaken = true; 
         }
     }
+
+    return actionTaken; 
 }
 }
