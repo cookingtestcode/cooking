@@ -51,13 +51,14 @@ public class Chef {
     public Object getName() {
         return this.name;
     }
-    public void scheduleCookingTask(LocalDateTime time) {
+public void scheduleCookingTask(LocalDateTime time) {
     Task scheduledTask = new Task("Scheduled Cooking Task", "General");
     scheduledTask.setDeadline(time);
     this.tasks.add(scheduledTask);
     this.notifications.add("Cooking Task scheduled for: " + time);
 }
-    public LocalDateTime getScheduledTaskTime() {
+
+public LocalDateTime getScheduledTaskTime() {
     return this.tasks.stream()
         .filter(task -> task.getDeadline() != null)
         .map(Task::getDeadline)
