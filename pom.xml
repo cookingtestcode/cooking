@@ -38,21 +38,29 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <reportSets>
-                <reportSet>
-                    <reports>
-                        <report>report</report>
-                    </reports>
-                </reportSet>
-            </reportSets>
-        </plugin>
-    </plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version> <!-- أضف الإصدار -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
   
     <reporting>
         <!-- Add reporting-specific configurations here if needed -->
