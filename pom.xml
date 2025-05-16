@@ -7,6 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>Cooking</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>  <!-- تحديد نوع الملف الناتج (jar) -->
 
     <dependencies>
         <dependency>
@@ -31,9 +32,10 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>  <!-- تغيير إلى Java 17 -->
+        <maven.compiler.target>17</maven.compiler.target>  <!-- تغيير إلى Java 17 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.projectKey>cookingtestcode_Cooking</sonar.projectKey>
         <sonar.organization>cookingtestcode</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -58,21 +60,9 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version> <!-- أضف الإصدار -->
+                <version>0.8.10</version>
                 <executions>
                     <execution>
                         <goals>
@@ -88,8 +78,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
-
-
 </project>
