@@ -1,0 +1,86 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>org.example</groupId>\n    <artifactId>Cooking</artifactId>\n    <version>1.0-SNAPSHOT</version>\n    <packaging>jar</packaging>  <!-- تحديد نوع الملف الناتج (jar) -->\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter-api</artifactId>\n            <version>5.12.0</version>\n            <scope>test</scope>\n        </dependency>\n        <dependency>\n            <groupId>io.cucumber</groupId>\n            <artifactId>cucumber-java</artifactId>\n            <version>7.21.1</version>\n        </dependency>\n\n        <dependency>\n            <groupId>io.cucumber</groupId>\n            <artifactId>cucumber-junit</artifactId>\n            <version>7.21.1</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <properties>\n        <maven.compiler.source>17</maven.compiler.source>  <!-- تغيير إلى Java 17 -->\n        <maven.compiler.target>17</maven.compiler.target>  <!-- تغيير إلى Java 17 -->\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n        <sonar.projectKey>cookingtestcode_Cooking</sonar.projectKey>\n        <sonar.organization>cookingtestcode</sonar.organization>\n        <sonar.host.url>https://sonarcloud.io</sonar.host.url>\n    </properties>\n\n    <build>\n        <finalName>cooking</finalName>\n        <plugins>\n\n                <plugin>\n                    <groupId>org.apache.maven.plugins</groupId>\n                    <artifactId>maven-jar-plugin</artifactId>\n                    <version>3.2.1</version>\n                </plugin>\n            <plugin>\n                <groupId>org.jacoco</groupId>\n                <artifactId>jacoco-maven-plugin</artifactId>\n                <version>0.8.10</version>\n                <executions>\n                    <execution>\n                        <goals>\n                            <goal>prepare-agent</goal>\n                        </goals>\n                    </execution>\n                    <execution>\n                        <id>generate-report</id>\n                        <phase>verify</phase>\n                        <goals>\n                            <goal>report</goal>\n                        </goals>\n                    </execution>\n                </executions>\n            </plugin>\n\n        </plugins>\n    </build>\n</project>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision e698536a48f912b59a36ae80b2f1ae242621561d)
++++ b/pom.xml	(date 1747417959771)
+@@ -43,11 +43,11 @@
+         <finalName>cooking</finalName>
+         <plugins>
+ 
+-                <plugin>
+-                    <groupId>org.apache.maven.plugins</groupId>
+-                    <artifactId>maven-jar-plugin</artifactId>
+-                    <version>3.2.1</version>
+-                </plugin>
++            <plugin>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-jar-plugin</artifactId>
++                <version>3.2.1</version>
++            </plugin>
+             <plugin>
+                 <groupId>org.jacoco</groupId>
+                 <artifactId>jacoco-maven-plugin</artifactId>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"566f62f4-ec54-4a4a-8852-42b9a7884c9b\" name=\"Changes\" comment=\"all without 6\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/pom.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/target/cucumber-reports.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/cucumber-reports.html\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CoverageOptionsProvider\">\n    <option name=\"myAddOrReplace\" value=\"0\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 1\n}</component>\n  <component name=\"ProjectId\" id=\"2ws5h7iIswOKjTTddNWJQbMvQAV\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.All in Cooking.executor&quot;: &quot;Coverage&quot;,\n    &quot;JUnit.STEP.executor&quot;: &quot;Coverage&quot;,\n    &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,\n    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor&quot;: &quot;Run&quot;,\n    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\n      <module name=\"cooking\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\n      <module name=\"cooking\" />\n      <option name=\"filePath\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"566f62f4-ec54-4a4a-8852-42b9a7884c9b\" name=\"Changes\" comment=\"\" />\n      <created>1746817560206</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1746817560206</updated>\n      <workItem from=\"1746817561247\" duration=\"4008000\" />\n      <workItem from=\"1746822708807\" duration=\"1873000\" />\n      <workItem from=\"1746868608546\" duration=\"2832000\" />\n      <workItem from=\"1746884175000\" duration=\"107000\" />\n      <workItem from=\"1746884523656\" duration=\"1364000\" />\n      <workItem from=\"1746898197896\" duration=\"1239000\" />\n      <workItem from=\"1747381043806\" duration=\"2072000\" />\n      <workItem from=\"1747383166425\" duration=\"145000\" />\n      <workItem from=\"1747390740682\" duration=\"213000\" />\n      <workItem from=\"1747390968512\" duration=\"982000\" />\n      <workItem from=\"1747399080959\" duration=\"227000\" />\n      <workItem from=\"1747399932403\" duration=\"475000\" />\n      <workItem from=\"1747400441868\" duration=\"743000\" />\n      <workItem from=\"1747401224846\" duration=\"149000\" />\n      <workItem from=\"1747412069316\" duration=\"1514000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"all without 6\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1746898325209</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1746898325209</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"all without 6\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"all without 6\" />\n  </component>\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\n    <SUITE FILE_PATH=\"coverage/cooking$All_in_Cooking.ic\" NAME=\"All in Cooking Coverage Results\" MODIFIED=\"1747412561215\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cooking$TestRunner.ic\" NAME=\"TestRunner Coverage Results\" MODIFIED=\"1747400648322\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cooking$STEP.ic\" NAME=\"STEP Coverage Results\" MODIFIED=\"1747400903581\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e698536a48f912b59a36ae80b2f1ae242621561d)
++++ b/.idea/workspace.xml	(date 1747417852259)
+@@ -4,11 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
+-    </list>
++    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="تعديل" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -116,7 +112,7 @@
+       <workItem from="1747399932403" duration="475000" />
+       <workItem from="1747400441868" duration="743000" />
+       <workItem from="1747401224846" duration="149000" />
+-      <workItem from="1747412069316" duration="1514000" />
++      <workItem from="1747412069316" duration="1847000" />
+     </task>
+     <task id="LOCAL-00001" summary="all without 6">
+       <option name="closed" value="true" />
+@@ -126,7 +122,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1746898325209</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="تعديل">
++      <option name="closed" value="true" />
++      <created>1747417768015</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1747417768015</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -145,7 +149,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="all without 6" />
+-    <option name="LAST_COMMIT_MESSAGE" value="all without 6" />
++    <MESSAGE value="تعديل" />
++    <option name="LAST_COMMIT_MESSAGE" value="تعديل" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+     <SUITE FILE_PATH="coverage/cooking$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747412561215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
