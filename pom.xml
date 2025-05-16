@@ -37,6 +37,10 @@
         <sonar.projectKey>cookingtestcode_Cooking</sonar.projectKey>
         <sonar.organization>cookingtestcode</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+   <sonar.coverage.jacoco.xmlReportPaths>
+    ../app-it/target/site/jacoco-aggregate/jacoco.xml
+  </sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <build>
@@ -48,26 +52,31 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.2.1</version>
                 </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>generate-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
+          <plugins>
+    <plugin>
+      <groupId>org.jacoco</groupId>
+     <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.7</version>
+      <executions>
+        <execution>
+          <id>prepare-agent</id>
+          <goals>
+            <goal>prepare-agent</goal>
+          </goals>
+        </execution>
+        <execution>
+          <id>report</id>
+          <goals>
+            <goal>report</goal>
+          </goals>
+          <configuration>
+            <formats>
+              <format>XML</format>
+            </formats>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
         </plugins>
     </build>
 </project>
