@@ -16,7 +16,6 @@
             <version>5.12.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -43,22 +42,12 @@
     <build>
         <finalName>cooking</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>your-classifier</classifier>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -70,7 +59,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
+                        <id>generate-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
