@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Billing_System.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Billing_System_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Customer_profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Customer_profile_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/InventoryStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/InventoryStepDefinitions_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Notifications_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask_Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/InventoryStepDefinitions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +148,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="all without 6" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/cooking$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747412561215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/cooking$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747421875440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>STEP.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/cooking$TestRunner.ic" NAME="TestRunner Coverage Results" MODIFIED="1747400648322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
