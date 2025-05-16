@@ -10,7 +10,6 @@ import model.CustomerProfile;
 import model.Menu;
 import model.OrderAndMenu;
 import org.junit.Assert;
-
 public class Billing_System {
     private BillingSystem billingSystem;
     private OrderAndMenu orderSystem;

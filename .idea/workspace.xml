@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +45,11 @@
     "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
     "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
     "JUnit.TestRunner.executor": "Coverage",
+    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor": "Run",
+    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor": "Run",
+    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor": "Run",
+    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor": "Run",
+    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
@@ -93,7 +98,7 @@
       <workItem from="1746884175000" duration="107000" />
       <workItem from="1746884523656" duration="1364000" />
       <workItem from="1746898197896" duration="1239000" />
-      <workItem from="1747381043806" duration="474000" />
+      <workItem from="1747381043806" duration="1549000" />
     </task>
     <task id="LOCAL-00001" summary="all without 6">
       <option name="closed" value="true" />
@@ -125,7 +130,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="all without 6" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/cooking$TestRunner.ic" NAME="TestRunner Coverage Results" MODIFIED="1747381105788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/cooking$TestRunner.ic" NAME="TestRunner Coverage Results" MODIFIED="1747382285453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>STEP.*</FILTER>
     </SUITE>
   </component>
