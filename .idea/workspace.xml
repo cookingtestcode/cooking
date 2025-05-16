@@ -5,20 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/InventoryStepDefinitions.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/InventoryStepDefinitions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Chef.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Billing_System.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Billing_System_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Customer_profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Customer_profile_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/InventoryStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/InventoryStepDefinitions_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Notifications_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/SchesulandTask_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/InventoryStepDefinitions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
