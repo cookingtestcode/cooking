@@ -62,8 +62,5 @@
         </plugins>
     </build>
   
-    <reporting>
-        <!-- Add reporting-specific configurations here if needed -->
-    </reporting>
 
 </project>
