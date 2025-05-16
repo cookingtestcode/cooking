@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/InventoryStepDefinitions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,30 +50,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Cucumber Java.Feature: Custome_Profile.executor": "Run",
-    "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
-    "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
-    "JUnit.TestRunner.executor": "Coverage",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,
+    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
+    <configuration name="TestRunner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Cooking" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="STEP.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="STEP" />
+      <option name="MAIN_CLASS_NAME" value="STEP.TestRunner" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="cooking" />
       <method v="2">
@@ -75,6 +106,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TestRunner" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -98,7 +134,10 @@
       <workItem from="1746884175000" duration="107000" />
       <workItem from="1746884523656" duration="1364000" />
       <workItem from="1746898197896" duration="1239000" />
-      <workItem from="1747381043806" duration="1549000" />
+      <workItem from="1747381043806" duration="2072000" />
+      <workItem from="1747383166425" duration="145000" />
+      <workItem from="1747390740682" duration="213000" />
+      <workItem from="1747390968512" duration="982000" />
     </task>
     <task id="LOCAL-00001" summary="all without 6">
       <option name="closed" value="true" />
