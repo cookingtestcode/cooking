@@ -10,13 +10,13 @@ import model.CustomerProfile;
 import model.Menu;
 import model.OrderAndMenu;
 import org.junit.Assert;
-public class Billing_System {
+public class Billing_System_Test {
     private BillingSystem billingSystem;
     private OrderAndMenu orderSystem;
     private Menu menu = new Menu();
     private CustomerProfile customer = new CustomerProfile();
 
-    public Billing_System() {
+    public Billing_System_Test() {
         this.orderSystem = new OrderAndMenu(this.menu);
         this.orderSystem.setCustomerProfile(this.customer);
         this.billingSystem = new BillingSystem(this.orderSystem);

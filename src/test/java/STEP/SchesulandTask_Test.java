@@ -6,7 +6,7 @@ import java.util.*;
 import io.cucumber.java.en.*;
 import model.*;
 
-public class SchesulandTask {
+public class SchesulandTask_Test {
     private Task task;
     private Chef assignedChef;
     private List<Chef> chefs = new ArrayList<>();
