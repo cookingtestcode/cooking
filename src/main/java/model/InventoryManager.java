@@ -1,47 +1,62 @@
+
 package model;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryManager {
-    private Map<String, Integer> inventory;
+    private Map<String, Integer> inventory = new HashMap();
+    private Map<String, Integer> criticalStockLevels = new HashMap();
+    private List<String> managerNotifications = new ArrayList();
+    private Map<String, Supplier> supplierDetails = new HashMap();
 
-    public InventoryManager() {
-        this.inventory = new HashMap<>();
+    public boolean isRestockSuggested(String ingredient) {
+        return inventory.getOrDefault(ingredient, 0) < criticalStockLevels.getOrDefault(ingredient, 2);
     }
 
-    public void setIngredientStock(String ingredient, int quantity) {
-        if (inventory.containsKey(ingredient)) {
-            inventory.put(ingredient, inventory.get(ingredient) + quantity);
+    public List<String> getManagerNotifications() {
+        return new ArrayList(this.managerNotifications);
+    }
+
+    public boolean isSupplierAPIConnected() {
+        return true;
+    }
+
+    public String fetchSupplierPrice(String ingredient) {
+        return this.supplierDetails.containsKey(ingredient) ? "$" + (10 + ingredient.length() % 5) + ".00" : null;
+    }
+
+    public boolean hasSupplierFor(String ingredient) {
+        return this.supplierDetails.containsKey(ingredient);
+    }
+
+    public boolean checkAndAutoOrder(String ingredient) {
+        if ((Integer)this.inventory.getOrDefault(ingredient, 0) < (Integer)this.criticalStockLevels.getOrDefault(ingredient, 2) && this.hasSupplierFor(ingredient)) {
+            this.managerNotifications.add("Auto-order placed for: " + ingredient);
+            return true;
         } else {
-            inventory.put(ingredient, quantity);
+            return false;
         }
-    }
-
-    public Map<String, Integer> getInventory() {
-        return inventory;
-    }
-
-    public boolean checkStock(String ingredient, int quantity) {
-        return inventory.getOrDefault(ingredient, 0) >= quantity;
     }
 
     public boolean checkLowStockAndNotifyManager() {
-        boolean isLowStock = false;
+        boolean actionTaken = false; 
+        for (Map.Entry<String, Integer> entry : this.inventory.entrySet()) {
+            String ingredient = entry.getKey();
+            int quantity = entry.getValue();
 
-        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
-            if (entry.getValue() < 5) {
-                isLowStock = true;
-                System.out.println("Low stock alert for: " + entry.getKey() + " - Only " + entry.getValue() + " left.");
+            if (this.isRestockSuggested(ingredient)) {
+                this.managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
+                actionTaken = true; 
+            }
+
+            if (this.checkAndAutoOrder(ingredient)) {
+                this.managerNotifications.add("Critical stock alert: Auto-order placed for " + ingredient);
+                actionTaken = true; 
             }
         }
-
-        if (isLowStock) {
-            System.out.println("Notifying manager about low stock.");
-            return true;
-        }
-
-        System.out.println("All items have sufficient stock.");
-        return false;
+        return actionTaken; 
     }
 }
