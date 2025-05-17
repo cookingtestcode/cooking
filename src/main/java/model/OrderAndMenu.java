@@ -121,7 +121,6 @@ public class OrderAndMenu {
             chef.getNotifications().add("Substitution Applied: " + this.appliedSubstitutionDetails);
         }
     }
-
     public String getSubstitutionDetails() {
         return this.appliedSubstitutionDetails;
     }
