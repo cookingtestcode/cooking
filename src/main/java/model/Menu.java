@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Menu {
-    private Map<String, Double> menuItems; // خريطة تحتوي على أسماء الأطباق والأسعار
-    private Map<String, String> itemCategory; // خريطة تحتوي على أسماء الأطباق والفئات (Main, Starter, Dessert)
-    private Map<String, String> dietaryTags; // خريطة تحتوي على أسماء الأطباق والوسوم الغذائية (Vegan, Vegetarian)
-    private Map<String, List<String>> itemIngredients; // خريطة تحتوي على أسماء الأطباق والمكونات
+    private Map<String, Double> menuItems;
+    private Map<String, String> itemCategory;
+    private Map<String, String> dietaryTags;
+    private Map<String, List<String>> itemIngredients;
 
     public Menu() {
         this.menuItems = new HashMap<>();
@@ -17,7 +17,6 @@ public class Menu {
         this.dietaryTags = new HashMap<>();
         this.itemIngredients = new HashMap<>();
 
-        // إضافة بعض الأطباق كمثال
         addMenuItem("Vegan Burger", 10.99, List.of("Lettuce", "Tomato", "Vegan Cheese"), "Main", "Vegan");
         addMenuItem("Vegetarian Salad", 8.99, List.of("Lettuce", "Tomato", "Olives", "Cucumber"), "Starter", "Vegetarian");
     }
@@ -47,6 +46,18 @@ public class Menu {
 
     public List<String> getMenuItems() {
         return new ArrayList<>(menuItems.keySet());
+    }
+
+    public List<String> getFilteredMenu(CustomerProfile customerProfile) {
+        List<String> filteredItems = new ArrayList<>();
+        String dietaryPreference = customerProfile.getDietaryPreference();
+        for (String item : menuItems.keySet()) {
+            String itemDietaryTag = getDietaryTag(item);
+            if (dietaryPreference.equalsIgnoreCase(itemDietaryTag)) {
+                filteredItems.add(item);
+            }
+        }
+        return filteredItems;
     }
 
     public Map<String, Double> getAllMenuItems() {
