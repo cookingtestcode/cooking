@@ -59,11 +59,7 @@ public class InventoryManager {
         return actionTaken;
     }
 
-    public void setIngredientStock(String ingredient, int quantity) {
-        inventory.put(ingredient, quantity);
-        System.out.println("Stock for " + ingredient + " updated to " + quantity);
-    }
-
+    // Add the missing method here:
     public Map<String, Integer> getInventory() {
         return this.inventory;
     }

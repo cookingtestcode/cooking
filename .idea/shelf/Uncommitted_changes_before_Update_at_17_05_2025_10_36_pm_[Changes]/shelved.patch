@@ -1,0 +1,233 @@
+Index: src/main/java/model/CustomerProfile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class CustomerProfile {\n    private String name;\n    private String dietaryPreference;\n    private String allergy;\n    private List<String> orderHistory;\n\n    public CustomerProfile() {\n        this.name = \"\";\n        this.dietaryPreference = \"\";\n        this.allergy = \"\";\n        this.orderHistory = new ArrayList<>();\n    }\n\n    // Getter and Setter methods\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getDietaryPreference() {\n        return dietaryPreference;\n    }\n\n    public void setDietaryPreference(String dietaryPreference) {\n        this.dietaryPreference = dietaryPreference;\n    }\n\n    public String getAllergy() {\n        return allergy;\n    }\n\n    public void setAllergy(String allergy) {\n        this.allergy = allergy;\n    }\n\n    public boolean hasAllergy(String ingredient) {\n\n        return this.allergy != null && this.allergy.equalsIgnoreCase(ingredient);\n    }\n\n    public void addOrder(String item) {\n        this.orderHistory.add(item);\n    }\n\n    public List<String> getOrderHistory() {\n        return this.orderHistory;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/CustomerProfile.java b/src/main/java/model/CustomerProfile.java
+--- a/src/main/java/model/CustomerProfile.java	(revision 6ef52f550e6e99d03537037c49debf7c515e9989)
++++ b/src/main/java/model/CustomerProfile.java	(date 1747510425065)
+@@ -1,56 +1,86 @@
++
+ package model;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
++import java.util.Map;
++import java.util.HashMap;
++import java.util.Iterator;
++import java.time.LocalDateTime;
+ 
+ public class CustomerProfile {
+     private String name;
+     private String dietaryPreference;
+     private String allergy;
+-    private List<String> orderHistory;
++    private List<String> mealSuggestions = new ArrayList();
++    private List<String> orderHistory = new ArrayList();
++    private LocalDateTime scheduledMealTime;
+ 
+-    public CustomerProfile() {
+-        this.name = "";
+-        this.dietaryPreference = "";
+-        this.allergy = "";
+-        this.orderHistory = new ArrayList<>();
+-    }
+-
+-    // Getter and Setter methods
+-    public String getName() {
+-        return name;
+-    }
++    public CustomerProfile() {}
+ 
+     public void setName(String name) {
+         this.name = name;
+     }
+ 
+-    public String getDietaryPreference() {
+-        return dietaryPreference;
++    public String getName() {
++        return this.name;
+     }
+ 
+     public void setDietaryPreference(String dietaryPreference) {
+         this.dietaryPreference = dietaryPreference;
+     }
+ 
+-    public String getAllergy() {
+-        return allergy;
+-    }
+-
+     public void setAllergy(String allergy) {
+         this.allergy = allergy;
+     }
+ 
+-    public boolean hasAllergy(String ingredient) {
++    public String getDietaryPreference() {
++        return this.dietaryPreference;
++    }
+ 
+-        return this.allergy != null && this.allergy.equalsIgnoreCase(ingredient);
++    public String getAllergy() {
++        return this.allergy;
+     }
+ 
+-    public void addOrder(String item) {
+-        this.orderHistory.add(item);
++    public List<String> getMealSuggestions() {
++        return this.mealSuggestions;
+     }
+ 
+     public List<String> getOrderHistory() {
+         return this.orderHistory;
+     }
++
++    public void generateMealSuggestions(List<String> availableMeals) {
++        this.mealSuggestions.clear();
++        Iterator var2 = availableMeals.iterator();
++
++        while(var2.hasNext()) {
++            String meal = (String)var2.next();
++            boolean matchesPreference = this.dietaryPreference == null || meal.toLowerCase().contains(this.dietaryPreference.toLowerCase());
++            boolean safeFromAllergy = this.allergy == null || !meal.toLowerCase().contains(this.allergy.toLowerCase());
++            if (matchesPreference && safeFromAllergy) {
++                this.mealSuggestions.add(meal);
++            }
++        }
++    }
++
++    public List<String> suggestPersonalizedMeals() {
++        Map<String, Integer> mealFrequency = new HashMap();
++        Iterator var2 = this.orderHistory.iterator();
++        while (var2.hasNext()) {
++            String meal = (String)var2.next();
++            mealFrequency.put(meal, mealFrequency.getOrDefault(meal, 0) + 1);
++        }
++        List<String> suggestions = new ArrayList();
++        for (Map.Entry<String, Integer> entry : mealFrequency.entrySet()) {
++            if (entry.getValue() > 1) {
++                suggestions.add(entry.getKey());
++            }
++        }
++        return suggestions;
++    }
++
++    public void addMultipleOrders(List<String> orders) {
++        this.orderHistory.addAll(orders);
++    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"566f62f4-ec54-4a4a-8852-42b9a7884c9b\" name=\"Changes\" comment=\"تعديل\">\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/model/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/model/CustomerProfile.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/model/CustomerProfile.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/model/InventoryManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/model/InventoryManager.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/model/Menu.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/model/Menu.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/model/NotificationService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/model/NotificationService.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CoverageOptionsProvider\">\n    <option name=\"myAddOrReplace\" value=\"0\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 1\n}</component>\n  <component name=\"ProjectId\" id=\"2ws5h7iIswOKjTTddNWJQbMvQAV\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Application.Main.executor\": \"Run\",\n    \"Cucumber Java.Feature: Custome_Profile.executor\": \"Run\",\n    \"Cucumber Java.Feature: Inventory_and_Supplier_Management.executor\": \"Run\",\n    \"Cucumber Java.Feature: OrderAndMenu.executor\": \"Run\",\n    \"JUnit.All in Cooking.executor\": \"Coverage\",\n    \"JUnit.All in cooking.executor\": \"Coverage\",\n    \"JUnit.STEP in cooking.executor\": \"Run\",\n    \"JUnit.STEP.executor\": \"Coverage\",\n    \"JUnit.TestRunner.executor\": \"Coverage\",\n    \"Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor\": \"Run\",\n    \"Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor\": \"Run\",\n    \"Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor\": \"Run\",\n    \"Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor\": \"Run\",\n    \"Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor\": \"Run\",\n    \"Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor\": \"Run\",\n    \"Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor\": \"Run\",\n    \"Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor\": \"Run\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"SONARLINT_PRECOMMIT_ANALYSIS\": \"true\",\n    \"git-widget-placeholder\": \"main\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"C:/Users/Lenovo/Documents/cookk/src\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"settings.editor.selected.configurable\": \"terminal\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Lenovo\\Documents\\cookk\\src\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"All in cooking\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"cooking\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"TEST_OBJECT\" value=\"package\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"STEP in cooking\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"cooking\" />\n      <option name=\"TEST_OBJECT\" value=\"directory\" />\n      <dir value=\"$PROJECT_DIR$/src/test/java/STEP\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"JUnit.STEP in cooking\" />\n        <item itemvalue=\"JUnit.All in cooking\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240\" />\n        <option value=\"bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"566f62f4-ec54-4a4a-8852-42b9a7884c9b\" name=\"Changes\" comment=\"\" />\n      <created>1746817560206</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1746817560206</updated>\n      <workItem from=\"1746817561247\" duration=\"4008000\" />\n      <workItem from=\"1746822708807\" duration=\"1873000\" />\n      <workItem from=\"1746868608546\" duration=\"2832000\" />\n      <workItem from=\"1746884175000\" duration=\"107000\" />\n      <workItem from=\"1746884523656\" duration=\"1364000\" />\n      <workItem from=\"1746898197896\" duration=\"1239000\" />\n      <workItem from=\"1747381043806\" duration=\"2072000\" />\n      <workItem from=\"1747383166425\" duration=\"145000\" />\n      <workItem from=\"1747390740682\" duration=\"213000\" />\n      <workItem from=\"1747390968512\" duration=\"982000\" />\n      <workItem from=\"1747399080959\" duration=\"227000\" />\n      <workItem from=\"1747399932403\" duration=\"475000\" />\n      <workItem from=\"1747400441868\" duration=\"743000\" />\n      <workItem from=\"1747401224846\" duration=\"149000\" />\n      <workItem from=\"1747412069316\" duration=\"1514000\" />\n      <workItem from=\"1747477659439\" duration=\"27000\" />\n      <workItem from=\"1747477783820\" duration=\"1240000\" />\n      <workItem from=\"1747479135241\" duration=\"175000\" />\n      <workItem from=\"1747480849772\" duration=\"1483000\" />\n      <workItem from=\"1747494441432\" duration=\"5680000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"all without 6\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1746898325209</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1746898325209</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"تعديل\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1747478888852</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1747478888852</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"تعديل\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1747479205109</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1747479205109</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"4\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"all without 6\" />\n    <MESSAGE value=\"تعديل\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"تعديل\" />\n  </component>\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\n    <SUITE FILE_PATH=\"coverage/cooking$All_in_Cooking.ic\" NAME=\"All in Cooking Coverage Results\" MODIFIED=\"1747421875440\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cookk$All_in_cooking.ic\" NAME=\"All in cooking Coverage Results\" MODIFIED=\"1747482827471\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\" />\n    <SUITE FILE_PATH=\"coverage/cookk$STEP_in_cooking.ic\" NAME=\"STEP in cooking Coverage Results\" MODIFIED=\"1747494571771\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\" />\n    <SUITE FILE_PATH=\"coverage/cooking$TestRunner.ic\" NAME=\"TestRunner Coverage Results\" MODIFIED=\"1747400648322\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cooking$STEP.ic\" NAME=\"STEP Coverage Results\" MODIFIED=\"1747400903581\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6ef52f550e6e99d03537037c49debf7c515e9989)
++++ b/.idea/workspace.xml	(date 1747510425495)
+@@ -5,12 +5,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="تعديل">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Menu.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -44,46 +40,46 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.Main.executor": "Run",
+-    "Cucumber Java.Feature: Custome_Profile.executor": "Run",
+-    "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
+-    "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
+-    "JUnit.All in Cooking.executor": "Coverage",
+-    "JUnit.All in cooking.executor": "Coverage",
+-    "JUnit.STEP in cooking.executor": "Run",
+-    "JUnit.STEP.executor": "Coverage",
+-    "JUnit.TestRunner.executor": "Coverage",
+-    "Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+-    "Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor": "Run",
+-    "Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor": "Run",
+-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor": "Run",
+-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor": "Run",
+-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor": "Run",
+-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor": "Run",
+-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+-    "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/Lenovo/Documents/cookk/src",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "settings.editor.selected.configurable": "terminal",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
++    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,
++    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,
++    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.All in Cooking.executor&quot;: &quot;Coverage&quot;,
++    &quot;JUnit.All in cooking.executor&quot;: &quot;Coverage&quot;,
++    &quot;JUnit.STEP in cooking.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.STEP.executor&quot;: &quot;Coverage&quot;,
++    &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,
++    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/Documents/cookk/src&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\Lenovo\Documents\cookk\src" />
+     </key>
+   </component>
+-  <component name="RunManager">
++  <component name="RunManager" selected="JUnit.All in Cooking">
+     <configuration name="All in cooking" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="cooking" />
+       <option name="PACKAGE_NAME" value="" />
+@@ -142,7 +138,8 @@
+       <workItem from="1747477783820" duration="1240000" />
+       <workItem from="1747479135241" duration="175000" />
+       <workItem from="1747480849772" duration="1483000" />
+-      <workItem from="1747494441432" duration="5680000" />
++      <workItem from="1747494441432" duration="6723000" />
++      <workItem from="1747509057118" duration="1367000" />
+     </task>
+     <task id="LOCAL-00001" summary="all without 6">
+       <option name="closed" value="true" />
