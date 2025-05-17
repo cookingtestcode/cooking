@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
-    </list>
+    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,50 +37,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Cucumber Java.Feature: Custome_Profile.executor": "Run",
-    "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
-    "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
-    "JUnit.All in Cooking.executor": "Coverage",
-    "JUnit.STEP.executor": "Coverage",
-    "JUnit.TestRunner.executor": "Coverage",
-    "Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor": "Run",
-    "Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor": "Run",
-    "Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "covarage",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "terminal",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Cooking.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.STEP.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,
+    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.apache.maven.plugins:maven-clean-plugin:3.2.0:help].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.apache.maven.plugins:maven-install-plugin:3.1.1:install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:check].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:dump].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-aggregate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report-integration].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Cooking [org.jacoco:jacoco-maven-plugin:0.8.10:report].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
+}</component>
+  <component name="RunManager" selected="JUnit.All in cooking">
+    <configuration name="All in cooking" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cooking" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="cooking" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in cooking" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -117,6 +113,7 @@
       <workItem from="1747400441868" duration="743000" />
       <workItem from="1747401224846" duration="149000" />
       <workItem from="1747412069316" duration="1514000" />
+      <workItem from="1747477659439" duration="27000" />
     </task>
     <task id="LOCAL-00001" summary="all without 6">
       <option name="closed" value="true" />

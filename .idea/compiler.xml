@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sof_cooking" />
         <module name="Cooking" />
+        <module name="cooking" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
