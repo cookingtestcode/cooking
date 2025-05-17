@@ -7,13 +7,13 @@ public class CustomerProfile {
     private String name;
     private String dietaryPreference;
     private String allergy;
-    private List<String> orderHistory; 
+    private List<String> orderHistory;
 
     public CustomerProfile() {
         this.name = "";
         this.dietaryPreference = "";
         this.allergy = "";
-        this.orderHistory = new ArrayList<>(); 
+        this.orderHistory = new ArrayList<>();
     }
 
     // Getter and Setter methods
@@ -39,6 +39,11 @@ public class CustomerProfile {
 
     public void setAllergy(String allergy) {
         this.allergy = allergy;
+    }
+
+    public boolean hasAllergy(String ingredient) {
+
+        return this.allergy != null && this.allergy.equalsIgnoreCase(ingredient);
     }
 
     public void addOrder(String item) {
