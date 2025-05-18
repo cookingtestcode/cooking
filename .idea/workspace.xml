@@ -4,29 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="all without 6">
+    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/TestRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/Chef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/BillingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/BillingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Chef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/OrderAndMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/OrderAndMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/cucumber-reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/cucumber-reports.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Custome_Profile.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Custome_Profile.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/OrderAndMenu.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/OrderAndMenu.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/Customer_profile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/OrderANDMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/SchesulandTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/STEP/TestRunner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SchedulingandTaskManagement.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Chef.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/model/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Chef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/CustomerProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager$Supplier.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/InventoryManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/OrderAndMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/model/Task.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,25 +58,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestRunner.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fatima2&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Cucumber Java.Feature: Custome_Profile.executor": "Run",
+    "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
+    "Cucumber Java.Feature: NotificationsandAlerts.executor": "Run",
+    "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
+    "JUnit.TestRunner.executor": "Coverage",
+    "JUnit.java in Cooking.executor": "Coverage",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "fatima2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/OneDrive/Documents/cooking",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Documents\cooking" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.java in Cooking">
+    <configuration name="TestRunner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Cooking" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="STEP.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="STEP" />
+      <option name="MAIN_CLASS_NAME" value="STEP.TestRunner" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in Cooking" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Cooking" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="cooking" />
       <method v="2">
@@ -89,6 +121,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.java in Cooking" />
+        <item itemvalue="JUnit.TestRunner" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -112,6 +150,9 @@
       <workItem from="1746884175000" duration="107000" />
       <workItem from="1746884523656" duration="1364000" />
       <workItem from="1746898197896" duration="1239000" />
+      <workItem from="1746899496501" duration="994000" />
+      <workItem from="1746901626797" duration="906000" />
+      <workItem from="1747594042877" duration="599000" />
     </task>
     <task id="LOCAL-00001" summary="all without 6">
       <option name="closed" value="true" />
@@ -121,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746898325209</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <option name="closed" value="true" />
+      <created>1746899561126</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746899561126</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +178,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="all without 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="all without 6" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/cooking$java_in_Cooking.ic" NAME="java in Cooking Coverage Results" MODIFIED="1747594292997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/cooking$TestRunner.ic" NAME="TestRunner Coverage Results" MODIFIED="1747594274073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>STEP.*</FILTER>
+    </SUITE>
   </component>
 </project>

@@ -12,14 +12,14 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class Notifications {
+public class Notifications_Test {
     private CustomerProfile customer;
     private Chef chef;
     private InventoryManager inventoryManager;
     private NotificationService notificationService;
     private LocalDateTime currentTime;
 
-    public Notifications() {
+    public Notifications_Test() {
         this.notificationService = new NotificationService();
         this.inventoryManager = new InventoryManager();
     }
