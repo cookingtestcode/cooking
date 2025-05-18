@@ -1,6 +1,7 @@
 
 package model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -127,5 +128,14 @@ public class CustomerProfile {
 
     public void rateMenuItem(String itemName, int rating) {
         System.out.println("Customer " + this.name + " rated " + itemName + " with " + rating + " stars");
+    }
+    private LocalDateTime mealDeliveryTime;
+
+    public void scheduleMeal(LocalDateTime deliveryTime) {
+        this.mealDeliveryTime = deliveryTime;
+    }
+
+    public LocalDateTime getMealDeliveryTime() {
+        return mealDeliveryTime;
     }
 }
