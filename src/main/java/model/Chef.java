@@ -1,6 +1,7 @@
 package model;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +19,6 @@ public class Chef {
             this.tasks.add(new Task("Task" + i, (String)expertise.get(0)));
         }
 
-
-    }
-    public void addNotification(String notification) {
-        notifications.add(notification);
     }
 
     public void assignTask(Task task) {
@@ -49,5 +46,15 @@ public class Chef {
 
     public Object getName() {
         return this.name;
+    }
+
+    private LocalDateTime scheduledTaskTime; // لحفظ وقت المهمة
+
+    public void scheduleCookingTask(LocalDateTime taskTime) {
+        this.scheduledTaskTime = taskTime;
+    }
+
+    public LocalDateTime getScheduledTaskTime() {
+        return scheduledTaskTime;
     }
 }
