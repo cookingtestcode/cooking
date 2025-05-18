@@ -1,22 +1,11 @@
 package model;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryManager {
-    private Map<String, Integer> inventory = new HashMap();
-    private Map<String, Integer> criticalStockLevels = new HashMap();
-    private List<String> managerNotifications = new ArrayList();
-    private Map<String, Supplier> supplierDetails = new HashMap();
 
     public boolean isRestockSuggested(String ingredient) {
-        return inventory.getOrDefault(ingredient, 0) < criticalStockLevels.getOrDefault(ingredient, 2);
-    }
-
-    public List<String> getManagerNotifications() {
-        return new ArrayList(this.managerNotifications);
     }
 
     public boolean isSupplierAPIConnected() {
@@ -32,7 +21,6 @@ public class InventoryManager {
     }
 
     public boolean checkAndAutoOrder(String ingredient) {
-        if ((Integer)this.inventory.getOrDefault(ingredient, 0) < (Integer)this.criticalStockLevels.getOrDefault(ingredient, 2) && this.hasSupplierFor(ingredient)) {
             this.managerNotifications.add("Auto-order placed for: " + ingredient);
             return true;
         } else {
@@ -40,31 +28,11 @@ public class InventoryManager {
         }
     }
 
-    public boolean checkLowStockAndNotifyManager() {
-        boolean actionTaken = false;
-        for (Map.Entry<String, Integer> entry : this.inventory.entrySet()) {
-            String ingredient = entry.getKey();
-            int quantity = entry.getValue();
 
-            if (this.isRestockSuggested(ingredient)) {
-                this.managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
-                actionTaken = true;
-            }
 
-            if (this.checkAndAutoOrder(ingredient)) {
-                this.managerNotifications.add("Critical stock alert: Auto-order placed for " + ingredient);
-                actionTaken = true;
-            }
         }
-        return actionTaken;
-    }
+        }
 
-    public void setIngredientStock(String ingredient, int quantity) {
-        inventory.put(ingredient, quantity);
-        System.out.println("Stock for " + ingredient + " updated to " + quantity);
-    }
-
-    public Map<String, Integer> getInventory() {
-        return this.inventory;
+        }
     }
 }
