@@ -6,7 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="تعديل">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Menu.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Chef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/OrderAndMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/OrderAndMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Supplier.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Task.java" afterDir="false" />
+>>>>>>> 28052f1495b9dc85fa7df2253d064d19a5e2bdfe
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +152,11 @@
       <workItem from="1747480849772" duration="1483000" />
       <workItem from="1747494441432" duration="5680000" />
       <workItem from="1747591756602" duration="2260000" />
+<<<<<<< HEAD
       <workItem from="1747599478834" duration="82000" />
+=======
+      <workItem from="1747596597602" duration="1324000" />
+>>>>>>> 28052f1495b9dc85fa7df2253d064d19a5e2bdfe
     </task>
     <task id="LOCAL-00001" summary="all without 6">
       <option name="closed" value="true" />
@@ -187,6 +203,17 @@
     <MESSAGE value="all without 6" />
     <MESSAGE value="تعديل" />
     <option name="LAST_COMMIT_MESSAGE" value="تعديل" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/model/CustomerProfile.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/cooking$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747421875440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
