@@ -5,7 +5,7 @@ import model.*;
 import org.junit.Assert;
 import java.util.List;
 
-public class OrderANDMenu_Test {
+public class OrderANDMenu {
     private OrderAndMenu orderManager;
     private CustomerProfile customerProfile;
     private Chef chef;

@@ -6,7 +6,7 @@ import org.junit.Assert;
 
 import java.util.*;
 
-public class Customer_profile_Test {
+public class Customer_profile {
     private static final CustomerProfile customer = new CustomerProfile();
     private static final Map<String, String> savedPreferences = new HashMap<>();
     private static final Map<String, List<String>> orderHistoryDatabase = new HashMap<>();

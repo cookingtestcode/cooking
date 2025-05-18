@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import model.InventoryManager;
 import java.util.Map;
 
-public class InventoryStepDefinitions_Test {
+public class InventoryStepDefinitions {
     private InventoryManager inventoryManager;
     private Map<String, Integer> currentInventory;
     private String latestPrice;

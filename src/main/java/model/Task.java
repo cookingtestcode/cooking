@@ -29,10 +29,6 @@ public class Task {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Task)) return false;

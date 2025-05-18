@@ -10,37 +10,40 @@ import model.CustomerProfile;
 import model.Menu;
 import model.OrderAndMenu;
 import org.junit.Assert;
-public class Billing_System_Test {
+
+public class Billing_System {
     private BillingSystem billingSystem;
     private OrderAndMenu orderSystem;
     private Menu menu = new Menu();
     private CustomerProfile customer = new CustomerProfile();
 
-    public Billing_System_Test() {
+    public Billing_System() {
         this.orderSystem = new OrderAndMenu(this.menu);
         this.orderSystem.setCustomerProfile(this.customer);
         this.billingSystem = new BillingSystem(this.orderSystem);
     }
+
     @Given("the customer has completed an order")
     public void theCustomerHasCompletedAnOrder() {
         this.customer.setName("Test Customer");
         this.orderSystem.addToOrder("Vegetarian Pizza");
         this.orderSystem.addToOrder("Chocolate Cake");
-
-        Assert.assertTrue("Orders should not be empty", this.orderSystem.getCurrentOrder().size() > 0);
-        this.billingSystem.generateInvoice();  // افترض أن هناك دالة تولد الفاتورة
+        this.billingSystem.completeOrder();
     }
-
 
     @When("the system processes the payment")
     public void theSystemProcessesThePayment() {
         Assert.assertTrue("Order should be cleared after completion", this.orderSystem.getCurrentOrder().isEmpty());
     }
+
     @Then("the customer should receive a detailed invoice")
     public void theCustomerShouldReceiveADetailedInvoice() {
-        double expectedRevenue = 46.23;
-        double actualRevenue = this.billingSystem.getTotalRevenue(); 
-        Assert.assertEquals("Total revenue should match", expectedRevenue, actualRevenue, 0.01);
+        BillingSystem.Invoice invoice = (BillingSystem.Invoice)this.billingSystem.getInvoices().get(0);
+        Assert.assertNotNull("Invoice should be generated", invoice);
+        Assert.assertEquals("Customer name should match", "Test Customer", invoice.getCustomerName());
+        Assert.assertTrue("Invoice should contain Vegetarian Pizza", invoice.getItems().contains("Vegetarian Pizza"));
+        Assert.assertTrue("Invoice should contain Chocolate Cake", invoice.getItems().contains("Chocolate Cake"));
+        Assert.assertEquals("Invoice total should match", 21.98, invoice.getTotal(), 0.01);
     }
 
     @And("the invoice should be saved in the system")
