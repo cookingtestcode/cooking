@@ -1,4 +1,3 @@
-
 name: SonarQube
 on:
   push:
@@ -33,6 +32,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          run: mvn -B jacoco:prepare-agent verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar jacoco:report \-Dsonar.coverage.exclusions=**/Menu.java,**/Main.java \-Dsonar.projectKey=cookingtestcode_cooking
+        run: mvn -B jacoco:prepare-agent verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar jacoco:report \-Dsonar.coverage.exclusions=**/Menu.java,**/Main.java -Dsonar.projectKey=cookingtestcode_cooking
+       
