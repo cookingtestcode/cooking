@@ -122,8 +122,6 @@ public class OrderAndMenu {
                 }
             }
         }
-
-
         return true;
     }
 }

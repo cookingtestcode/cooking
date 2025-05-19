@@ -168,7 +168,6 @@ public class OrderANDMenu {
         orderManager.setCustomerProfile(customerProfile);
         orderManager.assignChef(chef);
     }
-
     @Then("the total order price should be {double}")
     public void verifyTotalOrderPrice(Double expectedTotal) {
         double total = orderManager.calculateTotal();
