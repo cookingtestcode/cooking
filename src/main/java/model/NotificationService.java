@@ -16,9 +16,9 @@ public class NotificationService {
             return false;
         }
     }
-    public boolean sendDeliveryReminder(CustomerProfile customer, LocalDateTime deliveryTime) {
+    /*public boolean sendDeliveryReminder(CustomerProfile customer, LocalDateTime deliveryTime) {
         return sendDeliveryReminder(customer, deliveryTime, LocalDateTime.now());
-    }
+    }*/
 
     public boolean notifyChefOfUpcomingTask(Chef chef, LocalDateTime currentTime) {
         if (chef == null || currentTime == null || chef.getScheduledTaskTime() == null) {
