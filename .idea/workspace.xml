@@ -32,32 +32,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Cucumber Java.Feature: Custome_Profile.executor": "Run",
-    "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
-    "Cucumber Java.Feature: NotificationsandAlerts.executor": "Run",
-    "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
-    "JUnit.All in Cooking.executor": "Coverage",
-    "JUnit.STEP in Cooking.executor": "Coverage",
-    "JUnit.TestRunner.executor": "Coverage",
-    "JUnit.java in Cooking.executor": "Coverage",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: NotificationsandAlerts.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in Cooking.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.STEP in Cooking.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.java in Cooking.executor&quot;: &quot;Coverage&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.java in Cooking">
+}</component>
+  <component name="RunManager" selected="JUnit.All in Cooking">
+    <configuration name="All in Cooking" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Cooking" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="STEP in Cooking" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Cooking" />
       <extension name="coverage">
@@ -101,6 +109,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Cooking" />
         <item itemvalue="JUnit.java in Cooking" />
         <item itemvalue="JUnit.TestRunner" />
         <item itemvalue="JUnit.STEP in Cooking" />
