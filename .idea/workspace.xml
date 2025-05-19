@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update" />
+    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +31,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jihad-jamoos&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/cookingtestcode/cooking.git&quot;,
+    &quot;accountId&quot;: &quot;345a6ae1-5c45-4044-8f00-e97b95563a4b&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{ &quot;associatedIndex&quot;: 1 }</component>
   <component name="ProjectId" id="2ws5h7iIswOKjTTddNWJQbMvQAV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -44,7 +62,9 @@
     &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.java in Cooking.executor&quot;: &quot;Coverage&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -116,14 +136,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -173,6 +185,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/cooking12$java_in_Cooking.ic" NAME="java in Cooking Coverage Results" MODIFIED="1747647039695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/cooking12$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747646750750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>STEP.*</FILTER>
     </SUITE>
@@ -182,6 +195,6 @@
     <SUITE FILE_PATH="coverage/cooking12$TestRunner.ic" NAME="TestRunner Coverage Results" MODIFIED="1747642375550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>STEP.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/cooking12$java_in_Cooking.ic" NAME="java in Cooking Coverage Results" MODIFIED="1747647039695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/cookmanegment$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747673145031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
