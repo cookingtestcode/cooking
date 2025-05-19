@@ -82,18 +82,7 @@ public class CustomerProfile {
         });
         return (List)(personalizedSuggestions.isEmpty() ? this.mealSuggestions : personalizedSuggestions);
     }
-
-   /* public Map<String, Integer> analyzeOrderTrends() {
-        Map<String, Integer> trends = new HashMap();
-        Iterator var2 = this.orderHistory.iterator();
-
-        while(var2.hasNext()) {
-            String order = (String)var2.next();
-            trends.put(order, (Integer)trends.getOrDefault(order, 0) + 1);
-        }
-
-        return trends;
-    }*/
+    
 
     public void addOrder(String meal) {
         if (meal != null && !meal.trim().isEmpty()) {
@@ -114,21 +103,11 @@ public class CustomerProfile {
 
     }
 
-   /* public void clearOrderHistory() {
-        this.orderHistory.clear();
-    }*/
-
-   /* public List<String> getRecommendedItems(Menu menu) {
-        return menu.getFilteredMenu(this);
-    }
-*/
+ 
     public boolean hasAllergy(String ingredient) {
         return this.allergy != null && ingredient != null && ingredient.toLowerCase().contains(this.allergy.toLowerCase());
     }
 
-    /*public void rateMenuItem(String itemName, int rating) {
-        System.out.println("Customer " + this.name + " rated " + itemName + " with " + rating + " stars");
-    }*/
     private LocalDateTime mealDeliveryTime;
 
     public void scheduleMeal(LocalDateTime deliveryTime) {
