@@ -86,6 +86,11 @@ public class OrderANDMenu {
         Assert.assertFalse("Meal should be invalid due to allergy", mealIsValid);
     }
 
+    @Then("the system should reject the meal due to invalid ingredients")
+    public void verifyMealIsInvalidDueToInvalidIngredients() {
+        Assert.assertFalse("Meal should be invalid due to invalid ingredients", mealIsValid);
+    }
+
     @Then("the system should suggest {string}")
     public void verifySuggestedSubstitution(String expectedSubstitute) {
         Assert.assertEquals("Suggested substitution should match",
@@ -100,5 +105,10 @@ public class OrderANDMenu {
         String expectedNotification = "Substitution Applied: " + substitutionDetails;
         Assert.assertTrue("Chef should receive substitution notification",
                 chef.getNotifications().contains(expectedNotification));
+    }
+
+    @Then("the system should not suggest any substitution")
+    public void verifyNoSubstitutionSuggested() {
+        Assert.assertNull("No substitution should be suggested", suggestedSubstitution);
     }
 }
