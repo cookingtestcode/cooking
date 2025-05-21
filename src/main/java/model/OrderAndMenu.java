@@ -1,24 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class OrderAndMenu {
     private Menu menu;
-    private Set<String> selectedItems = new HashSet<>();
     private CustomerProfile customerProfile;
     private Chef assignedChef;
-    private Set<String> availableIngredients = new HashSet<>();
-    private Set<String[]> incompatiblePairs = new HashSet<>();
-    private Map<String, String> substitutions = new HashMap<>();
+    private Set<AbstractMap.SimpleEntry<String, String>> incompatiblePairs = new HashSet<>();
     private String restrictedIngredient;
     private String appliedSubstitutionDetails;
     private boolean substitutionApplied = false;
-    private String substitutionDetails;
+    private Set<String> selectedItems = Collections.synchronizedSet(new HashSet<>());
+    private Set<String> availableIngredients = Collections.synchronizedSet(new HashSet<>());
+    private Map<String, String> substitutions = Collections.synchronizedMap(new HashMap<>());
+
 
     public OrderAndMenu(Menu menu) {
         this.menu = menu;
@@ -36,11 +31,11 @@ public class OrderAndMenu {
         this.assignedChef = chef;
     }
 
-    public List<String> getRecommendedItems() {
-        return (List)(this.customerProfile == null ? new ArrayList(this.menu.getAllMenuItems().keySet()) : this.menu.getFilteredMenu(this.customerProfile));
-    }
-
     public boolean addToOrder(String itemName) {
+        if (itemName == null || itemName.trim().isEmpty()) {
+            return false;
+        }
+
         if (this.menu.getAllMenuItems().containsKey(itemName)) {
             this.selectedItems.add(itemName);
             if (this.assignedChef != null) {
@@ -52,54 +47,35 @@ public class OrderAndMenu {
     }
 
     public boolean removeFromOrder(String itemName) {
-        return this.selectedItems.remove(itemName);
+        return selectedItems.remove(itemName);
     }
 
     public double calculateTotal() {
-        double total = 0.0;
-        for (String item : this.selectedItems) {
-            total += this.menu.getItemPrice(item);
-        }
-        return total;
+        return selectedItems.stream()
+                .mapToDouble(menu::getItemPrice)
+                .sum();
     }
 
     public Set<String> getCurrentOrder() {
-        return new HashSet<>(this.selectedItems);
+        return new HashSet<>(selectedItems);
     }
 
     public void confirmOrder() {
-        if (this.customerProfile != null) {
-            for (String item : this.selectedItems) {
-                this.customerProfile.addOrder(item);
+        if (customerProfile != null) {
+            for (String item : selectedItems) {
+                customerProfile.addOrder(item);
             }
         }
-        this.selectedItems.clear();
+        selectedItems.clear();
     }
 
-    public void setAvailableIngredients(String ing1, String ing2, String ing3) {
-        this.availableIngredients.clear();
-        this.availableIngredients.add(ing1);
-        this.availableIngredients.add(ing2);
-        this.availableIngredients.add(ing3);
+    public void setAvailableIngredients(String... ingredients) {
+        availableIngredients.clear();
+        availableIngredients.addAll(Arrays.asList(ingredients));
     }
 
     public void addIncompatiblePair(String item1, String item2) {
-        this.incompatiblePairs.add(new String[]{item1, item2});
-    }
-
-    public boolean isValidMeal(String ing1, String ing2) {
-        if (this.availableIngredients.contains(ing1) && this.availableIngredients.contains(ing2)) {
-            for (String[] pair : this.incompatiblePairs) {
-                if ((pair[0].equals(ing1) && pair[1].equals(ing2)) || (pair[0].equals(ing2) && pair[1].equals(ing1))) {
-                    return false;
-                }
-            }
-            if (this.customerProfile != null && (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {
-                return false;
-            }
-            return true;
-        }
-        return false;
+        incompatiblePairs.add(new AbstractMap.SimpleEntry<>(item1, item2));
     }
 
     public void setRestrictedIngredient(String ingredient) {
@@ -107,26 +83,54 @@ public class OrderAndMenu {
     }
 
     public void addSubstitution(String original, String substitute) {
-        this.substitutions.put(original, substitute);
+        substitutions.put(original, substitute);
     }
 
     public String suggestSubstitution(String ingredient) {
-        return this.substitutions.getOrDefault(ingredient, null);
+        return substitutions.getOrDefault(ingredient, null);
     }
-
     public void applySubstitution(String original, String substitute, Chef chef) {
+        if (original == null || substitute == null) {
+            throw new IllegalArgumentException("Original and substitute ingredients cannot be null");
+        }
+
         this.appliedSubstitutionDetails = original + " -> " + substitute;
         this.substitutionApplied = true;
+
         if (chef != null) {
             chef.getNotifications().add("Substitution Applied: " + this.appliedSubstitutionDetails);
+        } else {
+            throw new IllegalStateException("Chef must be assigned for substitution to be applied");
         }
     }
-
     public String getSubstitutionDetails() {
-        return this.appliedSubstitutionDetails;
+        return appliedSubstitutionDetails;
     }
 
     public boolean isSubstitutionApplied() {
-        return this.appliedSubstitutionDetails != null && this.substitutionApplied;
+        return appliedSubstitutionDetails != null && substitutionApplied;
     }
+    public boolean isValidMeal(String ing1, String ing2) {
+        if (ing1 == null || ing2 == null) {
+            return false;
+        }
+
+        if (!this.availableIngredients.contains(ing1) || !this.availableIngredients.contains(ing2)) {
+            return false;
+        }
+        for (AbstractMap.SimpleEntry<String, String> pair : this.incompatiblePairs) {
+            if ((pair.getKey().equals(ing1) && pair.getValue().equals(ing2)) ||
+                    (pair.getKey().equals(ing2) && pair.getValue().equals(ing1))) {
+                return false;
+            }
+        }
+
+        if (this.customerProfile != null &&
+                (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
