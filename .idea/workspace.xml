@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +51,7 @@
     "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
     "Cucumber Java.Feature: NotificationsandAlerts.executor": "Run",
     "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
-    "JUnit.All in Cooking.executor": "Run",
+    "JUnit.All in Cooking.executor": "Coverage",
     "JUnit.STEP in Cooking.executor": "Coverage",
     "JUnit.TestRunner.executor": "Coverage",
     "JUnit.java in Cooking.executor": "Coverage",
@@ -192,5 +190,6 @@
       <FILTER>STEP.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/cookmanegment$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747673145031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/cookingsof$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747808538834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>
