@@ -1,0 +1,140 @@
+Index: src/main/java/model/OrderAndMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.HashSet;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.Set;\n\npublic class OrderAndMenu {\n    private Menu menu;\n    private Set<String> selectedItems = new HashSet<>();\n    private CustomerProfile customerProfile;\n    private Chef assignedChef;\n    private Set<String> availableIngredients = new HashSet<>();\n    private Set<String[]> incompatiblePairs = new HashSet<>();\n    private Map<String, String> substitutions = new HashMap<>();\n    private String restrictedIngredient;\n    private String appliedSubstitutionDetails;\n    private boolean substitutionApplied = false;\n    private String substitutionDetails;\n\n    public OrderAndMenu(Menu menu) {\n        this.menu = menu;\n    }\n\n    public void setCustomerProfile(CustomerProfile customerProfile) {\n        this.customerProfile = customerProfile;\n    }\n\n    public CustomerProfile getCustomerProfile() {\n        return this.customerProfile;\n    }\n\n    public void assignChef(Chef chef) {\n        this.assignedChef = chef;\n    }\n\n    public List<String> getRecommendedItems() {\n        return (List)(this.customerProfile == null ? new ArrayList(this.menu.getAllMenuItems().keySet()) : this.menu.getFilteredMenu(this.customerProfile));\n    }\n\n    public boolean addToOrder(String itemName) {\n        if (this.menu.getAllMenuItems().containsKey(itemName)) {\n            this.selectedItems.add(itemName);\n            if (this.assignedChef != null) {\n                this.assignedChef.getNotifications().add(\"New order item: \" + itemName);\n            }\n            return true;\n        }\n        return false;\n    }\n\n    public boolean removeFromOrder(String itemName) {\n        return this.selectedItems.remove(itemName);\n    }\n\n    public double calculateTotal() {\n        double total = 0.0;\n        for (String item : this.selectedItems) {\n            total += this.menu.getItemPrice(item);\n        }\n        return total;\n    }\n\n    public Set<String> getCurrentOrder() {\n        return new HashSet<>(this.selectedItems);\n    }\n\n    public void confirmOrder() {\n        if (this.customerProfile != null) {\n            for (String item : this.selectedItems) {\n                this.customerProfile.addOrder(item);\n            }\n        }\n        this.selectedItems.clear();\n    }\n\n    public void setAvailableIngredients(String ing1, String ing2, String ing3) {\n        this.availableIngredients.clear();\n        this.availableIngredients.add(ing1);\n        this.availableIngredients.add(ing2);\n        this.availableIngredients.add(ing3);\n    }\n\n    public void addIncompatiblePair(String item1, String item2) {\n        this.incompatiblePairs.add(new String[]{item1, item2});\n    }\n\n    public boolean isValidMeal(String ing1, String ing2) {\n        if (this.availableIngredients.contains(ing1) && this.availableIngredients.contains(ing2)) {\n            for (String[] pair : this.incompatiblePairs) {\n                if ((pair[0].equals(ing1) && pair[1].equals(ing2)) || (pair[0].equals(ing2) && pair[1].equals(ing1))) {\n                    return false;\n                }\n            }\n            if (this.customerProfile != null && (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {\n                return false;\n            }\n            return true;\n        }\n        return false;\n    }\n\n    public void setRestrictedIngredient(String ingredient) {\n        this.restrictedIngredient = ingredient;\n    }\n\n    public void addSubstitution(String original, String substitute) {\n        this.substitutions.put(original, substitute);\n    }\n\n    public String suggestSubstitution(String ingredient) {\n        return this.substitutions.getOrDefault(ingredient, null);\n    }\n\n    public void applySubstitution(String original, String substitute, Chef chef) {\n        this.appliedSubstitutionDetails = original + \" -> \" + substitute;\n        this.substitutionApplied = true;\n        if (chef != null) {\n            chef.getNotifications().add(\"Substitution Applied: \" + this.appliedSubstitutionDetails);\n        }\n    }\n\n    public String getSubstitutionDetails() {\n        return this.appliedSubstitutionDetails;\n    }\n\n    public boolean isSubstitutionApplied() {\n        return this.appliedSubstitutionDetails != null && this.substitutionApplied;\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/OrderAndMenu.java b/src/main/java/model/OrderAndMenu.java
+--- a/src/main/java/model/OrderAndMenu.java	
++++ b/src/main/java/model/OrderAndMenu.java	
+@@ -1,11 +1,6 @@
+ package model;
+ 
+-import java.util.ArrayList;
+-import java.util.HashMap;
+-import java.util.HashSet;
+-import java.util.List;
+-import java.util.Map;
+-import java.util.Set;
++import java.util.*;
+ 
+ public class OrderAndMenu {
+     private Menu menu;
+@@ -13,7 +8,7 @@
+     private CustomerProfile customerProfile;
+     private Chef assignedChef;
+     private Set<String> availableIngredients = new HashSet<>();
+-    private Set<String[]> incompatiblePairs = new HashSet<>();
++    private Set<String[]> incompatiblePairs = new HashSet<>(); // يمكن تركها على هذا النحو أو استخدام Set<Pair<String, String>> إذا كان ذلك أكثر وضوحًا
+     private Map<String, String> substitutions = new HashMap<>();
+     private String restrictedIngredient;
+     private String appliedSubstitutionDetails;
+@@ -37,7 +32,8 @@
+     }
+ 
+     public List<String> getRecommendedItems() {
+-        return (List)(this.customerProfile == null ? new ArrayList(this.menu.getAllMenuItems().keySet()) : this.menu.getFilteredMenu(this.customerProfile));
++        // إذا كان هناك ملف تعريف العميل، قم بفلترة العناصر بناءً على التفضيلات.
++        return this.customerProfile == null ? new ArrayList<>(this.menu.getAllMenuItems().keySet()) : this.menu.getFilteredMenu(this.customerProfile);
+     }
+ 
+     public boolean addToOrder(String itemName) {
+@@ -76,11 +72,9 @@
+         this.selectedItems.clear();
+     }
+ 
+-    public void setAvailableIngredients(String ing1, String ing2, String ing3) {
++    public void setAvailableIngredients(String... ingredients) {
+         this.availableIngredients.clear();
+-        this.availableIngredients.add(ing1);
+-        this.availableIngredients.add(ing2);
+-        this.availableIngredients.add(ing3);
++        this.availableIngredients.addAll(Arrays.asList(ingredients)); // استخدام طريقة أكثر كفاءة لإضافة العناصر
+     }
+ 
+     public void addIncompatiblePair(String item1, String item2) {
+@@ -94,6 +88,7 @@
+                     return false;
+                 }
+             }
++            // التحقق من الحساسية إذا كان العميل يحتوي على حساسية لأي من المكونات
+             if (this.customerProfile != null && (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {
+                 return false;
+             }
+@@ -129,4 +124,4 @@
+     public boolean isSubstitutionApplied() {
+         return this.appliedSubstitutionDetails != null && this.substitutionApplied;
+     }
+-}
+\ No newline at end of file
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"566f62f4-ec54-4a4a-8852-42b9a7884c9b\" name=\"Changes\" comment=\"update\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/model/NotificationService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/model/NotificationService.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/STEP/Notifications.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/STEP/Notifications.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;jihad-jamoos&quot;\n  }\n}</component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/cookingtestcode/cooking.git&quot;,\n    &quot;accountId&quot;: &quot;345a6ae1-5c45-4044-8f00-e97b95563a4b&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{ &quot;associatedIndex&quot;: 1 }</component>\n  <component name=\"ProjectId\" id=\"2ws5h7iIswOKjTTddNWJQbMvQAV\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: Custome_Profile.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: Inventory_and_Supplier_Management.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: NotificationsandAlerts.executor&quot;: &quot;Run&quot;,\n    &quot;Cucumber Java.Feature: OrderAndMenu.executor&quot;: &quot;Run&quot;,\n    &quot;JUnit.All in Cooking.executor&quot;: &quot;Coverage&quot;,\n    &quot;JUnit.STEP in Cooking.executor&quot;: &quot;Coverage&quot;,\n    &quot;JUnit.TestRunner.executor&quot;: &quot;Coverage&quot;,\n    &quot;JUnit.java in Cooking.executor&quot;: &quot;Coverage&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RunManager\" selected=\"JUnit.All in Cooking\">\n    <configuration name=\"All in Cooking\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Cooking\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"TEST_OBJECT\" value=\"package\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"STEP in Cooking\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Cooking\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"STEP.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"17\" />\n      <option name=\"PACKAGE_NAME\" value=\"STEP\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"\" />\n      <option name=\"METHOD_NAME\" value=\"\" />\n      <option name=\"TEST_OBJECT\" value=\"package\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"TestRunner\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Cooking\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"STEP.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"STEP\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"STEP.TestRunner\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"java in Cooking\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Cooking\" />\n      <option name=\"TEST_OBJECT\" value=\"directory\" />\n      <dir value=\"$PROJECT_DIR$/src/test/java\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"JUnit.All in Cooking\" />\n        <item itemvalue=\"JUnit.java in Cooking\" />\n        <item itemvalue=\"JUnit.TestRunner\" />\n        <item itemvalue=\"JUnit.STEP in Cooking\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"566f62f4-ec54-4a4a-8852-42b9a7884c9b\" name=\"Changes\" comment=\"\" />\n      <created>1746817560206</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1746817560206</updated>\n      <workItem from=\"1746817561247\" duration=\"4008000\" />\n      <workItem from=\"1746822708807\" duration=\"1873000\" />\n      <workItem from=\"1746868608546\" duration=\"2832000\" />\n      <workItem from=\"1746884175000\" duration=\"107000\" />\n      <workItem from=\"1746884523656\" duration=\"1364000\" />\n      <workItem from=\"1746898197896\" duration=\"1239000\" />\n      <workItem from=\"1746899496501\" duration=\"994000\" />\n      <workItem from=\"1746901626797\" duration=\"906000\" />\n      <workItem from=\"1747599562402\" duration=\"102000\" />\n      <workItem from=\"1747641563471\" duration=\"816000\" />\n      <workItem from=\"1747646708280\" duration=\"79000\" />\n      <workItem from=\"1747646855207\" duration=\"1155000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"all without 6\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1746898325209</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1746898325209</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"update\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1746899561126</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1746899561126</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"all without 6\" />\n    <MESSAGE value=\"update\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"update\" />\n  </component>\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\n    <SUITE FILE_PATH=\"coverage/cooking12$java_in_Cooking.ic\" NAME=\"java in Cooking Coverage Results\" MODIFIED=\"1747647039695\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\" />\n    <SUITE FILE_PATH=\"coverage/cooking12$All_in_Cooking.ic\" NAME=\"All in Cooking Coverage Results\" MODIFIED=\"1747646750750\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cooking12$STEP_in_Cooking.ic\" NAME=\"STEP in Cooking Coverage Results\" MODIFIED=\"1747642014359\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cooking12$TestRunner.ic\" NAME=\"TestRunner Coverage Results\" MODIFIED=\"1747642375550\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\">\n      <FILTER>STEP.*</FILTER>\n    </SUITE>\n    <SUITE FILE_PATH=\"coverage/cookmanegment$All_in_Cooking.ic\" NAME=\"All in Cooking Coverage Results\" MODIFIED=\"1747673145031\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"true\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -7,9 +7,12 @@
+     <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update">
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Chef.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CustomerProfile.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/InventoryManager.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/NotificationService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/Notifications.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/NotificationsandAlerts.feature" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/OrderAndMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/OrderAndMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Task.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -135,6 +138,14 @@
+         <item itemvalue="JUnit.STEP in Cooking" />
+       </list>
+     </recent_temporary>
++  </component>
++  <component name="SharedIndexes">
++    <attachedChunks>
++      <set>
++        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
++        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
++      </set>
++    </attachedChunks>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -156,6 +167,9 @@
+       <workItem from="1747641563471" duration="816000" />
+       <workItem from="1747646708280" duration="79000" />
+       <workItem from="1747646855207" duration="1155000" />
++      <workItem from="1747678629472" duration="4894000" />
++      <workItem from="1747774553366" duration="775000" />
++      <workItem from="1747805126514" duration="3391000" />
+     </task>
+     <task id="LOCAL-00001" summary="all without 6">
+       <option name="closed" value="true" />
+@@ -185,7 +199,8 @@
+     <option name="LAST_COMMIT_MESSAGE" value="update" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/cooking12$java_in_Cooking.ic" NAME="java in Cooking Coverage Results" MODIFIED="1747647039695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
++    <SUITE FILE_PATH="coverage/cookmanegment$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747673145031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
++    <SUITE FILE_PATH="coverage/cooking7$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747678708906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+     <SUITE FILE_PATH="coverage/cooking12$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747646750750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+       <FILTER>STEP.*</FILTER>
+     </SUITE>
+@@ -195,6 +210,6 @@
+     <SUITE FILE_PATH="coverage/cooking12$TestRunner.ic" NAME="TestRunner Coverage Results" MODIFIED="1747642375550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+       <FILTER>STEP.*</FILTER>
+     </SUITE>
+-    <SUITE FILE_PATH="coverage/cookmanegment$All_in_Cooking.ic" NAME="All in Cooking Coverage Results" MODIFIED="1747673145031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
++    <SUITE FILE_PATH="coverage/cooking12$java_in_Cooking.ic" NAME="java in Cooking Coverage Results" MODIFIED="1747647039695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+   </component>
+ </project>
+\ No newline at end of file

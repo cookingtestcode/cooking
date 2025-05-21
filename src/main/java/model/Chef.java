@@ -1,6 +1,5 @@
 package model;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,24 +7,22 @@ import java.util.List;
 public class Chef {
     private String name;
     private List<String> expertise;
-    private List<Task> tasks = new ArrayList();
-    private List<String> notifications = new ArrayList();
+    private List<Task> tasks = new ArrayList<>();  // تحديد النوع List<Task>
+    private List<String> notifications = new ArrayList<>();  // تحديد النوع List<String>
 
     public Chef(String name, List<String> expertise, int initialTasks) {
         this.name = name;
         this.expertise = expertise;
 
-        for(int i = 0; i < initialTasks; ++i) {
-            this.tasks.add(new Task("Task" + i, (String)expertise.get(0)));
+        for (int i = 0; i < initialTasks; ++i) {
+            this.tasks.add(new Task("Task" + i, expertise.get(0)));  // لا حاجة لتحويل expertise.get(0) إلى String
         }
-
     }
 
     public void assignTask(Task task) {
         this.tasks.add(task);
-        List var10000 = this.notifications;
-        String var10001 = task.getName();
-        var10000.add("New Task Assigned: " + var10001 + (task.getDeadline() != null ? " (Due: " + String.valueOf(task.getDeadline()) + ")" : ""));
+        this.notifications.add("New Task Assigned: " + task.getName() +
+                (task.getDeadline() != null ? " (Due: " + task.getDeadline() + ")" : ""));
     }
 
     public List<String> getExpertise() {
@@ -44,7 +41,7 @@ public class Chef {
         return this.notifications;
     }
 
-    public Object getName() {
+    public String getName() {  // تعديل النوع إلى String
         return this.name;
     }
 

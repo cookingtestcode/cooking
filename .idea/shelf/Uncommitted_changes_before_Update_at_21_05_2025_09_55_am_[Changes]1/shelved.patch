@@ -1,0 +1,349 @@
+Index: src/main/java/model/Task.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport java.time.LocalDateTime;\n\npublic class Task {\n    private String name;\n    private String type;\n    private LocalDateTime deadline;\n\n    public Task(String name, String type, LocalDateTime deadline) {\n        this.name = name;\n        this.type = type;\n        this.deadline = deadline;\n    }\n\n    public Task(String name, String type) {\n        this(name, type, null);\n    }\n\n    public String getType() {\n        return type;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public LocalDateTime getDeadline() {\n        return deadline;\n    }\n\n    @Override\n    public boolean equals(Object o) {\n        if (!(o instanceof Task)) return false;\n        Task other = (Task) o;\n        return name.equals(other.name) && type.equals(other.type);\n    }\n\n    @Override\n    public int hashCode() {\n        return name.hashCode() + type.hashCode();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/Task.java b/src/main/java/model/Task.java
+--- a/src/main/java/model/Task.java	
++++ b/src/main/java/model/Task.java	
+@@ -1,18 +1,21 @@
+ package model;
+ 
+ import java.time.LocalDateTime;
++import java.util.Objects;
+ 
+ public class Task {
+     private String name;
+     private String type;
+     private LocalDateTime deadline;
+ 
++    // Constructor with deadline
+     public Task(String name, String type, LocalDateTime deadline) {
+         this.name = name;
+         this.type = type;
+         this.deadline = deadline;
+     }
+ 
++    // Constructor without deadline (deadline will be null)
+     public Task(String name, String type) {
+         this(name, type, null);
+     }
+@@ -29,15 +32,18 @@
+         return deadline;
+     }
+ 
++    // Overriding equals method to compare Task objects
+     @Override
+     public boolean equals(Object o) {
+-        if (!(o instanceof Task)) return false;
+-        Task other = (Task) o;
+-        return name.equals(other.name) && type.equals(other.type);
++        if (this == o) return true; // check for the same object
++        if (o == null || getClass() != o.getClass()) return false; // check for null and class mismatch
++        Task task = (Task) o;
++        return name.equals(task.name) && type.equals(task.type); // check for equality based on name and type
+     }
+ 
++    // Overriding hashCode method to maintain consistency with equals
+     @Override
+     public int hashCode() {
+-        return name.hashCode() + type.hashCode();
++        return Objects.hash(name, type); // more robust hashCode calculation using Objects.hash()
+     }
+-}
+\ No newline at end of file
++}
+Index: src/main/java/model/CustomerProfile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\npackage model;\n\nimport java.time.LocalDateTime;\nimport java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.Iterator;\nimport java.util.List;\nimport java.util.Map;\n\npublic class CustomerProfile {\n    private String name;\n    private String dietaryPreference;\n    private String allergy;\n    private List<String> mealSuggestions = new ArrayList();\n    private List<String> orderHistory = new ArrayList();\n\n    public CustomerProfile() {\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public String getName() {\n        return this.name;\n    }\n\n    public void setDietaryPreference(String dietaryPreference) {\n        this.dietaryPreference = dietaryPreference;\n    }\n\n    public void setAllergy(String allergy) {\n        this.allergy = allergy;\n    }\n\n    public String getDietaryPreference() {\n        return this.dietaryPreference;\n    }\n\n    public String getAllergy() {\n        return this.allergy;\n    }\n\n    public List<String> getMealSuggestions() {\n        return this.mealSuggestions;\n    }\n\n    public List<String> getOrderHistory() {\n        return this.orderHistory;\n    }\n\n    public void generateMealSuggestions(List<String> availableMeals) {\n        this.mealSuggestions.clear();\n        Iterator var2 = availableMeals.iterator();\n\n        while(var2.hasNext()) {\n            String meal = (String)var2.next();\n            boolean matchesPreference = this.dietaryPreference == null || meal.toLowerCase().contains(this.dietaryPreference.toLowerCase());\n            boolean safeFromAllergy = this.allergy == null || !meal.toLowerCase().contains(this.allergy.toLowerCase());\n            if (matchesPreference && safeFromAllergy) {\n                this.mealSuggestions.add(meal);\n            }\n        }\n\n    }\n\n    public List<String> suggestPersonalizedMeals() {\n        Map<String, Integer> mealFrequency = new HashMap();\n        Iterator var2 = this.orderHistory.iterator();\n\n        while(var2.hasNext()) {\n            String order = (String)var2.next();\n            mealFrequency.put(order, (Integer)mealFrequency.getOrDefault(order, 0) + 1);\n        }\n\n        List<String> personalizedSuggestions = new ArrayList();\n        mealFrequency.entrySet().stream().sorted((e1, e2) -> {\n            return ((Integer)e2.getValue()).compareTo((Integer)e1.getValue());\n        }).limit(3L).forEach((e) -> {\n            personalizedSuggestions.add((String)e.getKey());\n        });\n        return (List)(personalizedSuggestions.isEmpty() ? this.mealSuggestions : personalizedSuggestions);\n    }\n    \n\n    public void addOrder(String meal) {\n        if (meal != null && !meal.trim().isEmpty()) {\n            this.orderHistory.add(meal);\n        }\n\n    }\n\n    public void addMultipleOrders(List<String> meals) {\n        if (meals != null) {\n            Iterator var2 = meals.iterator();\n\n            while(var2.hasNext()) {\n                String meal = (String)var2.next();\n                this.addOrder(meal);\n            }\n        }\n\n    }\n\n \n    public boolean hasAllergy(String ingredient) {\n        return this.allergy != null && ingredient != null && ingredient.toLowerCase().contains(this.allergy.toLowerCase());\n    }\n\n    private LocalDateTime mealDeliveryTime;\n\n    public void scheduleMeal(LocalDateTime deliveryTime) {\n        this.mealDeliveryTime = deliveryTime;\n    }\n\n    public LocalDateTime getMealDeliveryTime() {\n        return mealDeliveryTime;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/CustomerProfile.java b/src/main/java/model/CustomerProfile.java
+--- a/src/main/java/model/CustomerProfile.java	
++++ b/src/main/java/model/CustomerProfile.java	
+@@ -1,4 +1,3 @@
+-
+ package model;
+ 
+ import java.time.LocalDateTime;
+@@ -12,8 +11,8 @@
+     private String name;
+     private String dietaryPreference;
+     private String allergy;
+-    private List<String> mealSuggestions = new ArrayList();
+-    private List<String> orderHistory = new ArrayList();
++    private List<String> mealSuggestions = new ArrayList<>();  // تحديد النوع List<String>
++    private List<String> orderHistory = new ArrayList<>();  // تحديد النوع List<String>
+ 
+     public CustomerProfile() {
+     }
+@@ -52,58 +51,45 @@
+ 
+     public void generateMealSuggestions(List<String> availableMeals) {
+         this.mealSuggestions.clear();
+-        Iterator var2 = availableMeals.iterator();
+-
+-        while(var2.hasNext()) {
+-            String meal = (String)var2.next();
+-            boolean matchesPreference = this.dietaryPreference == null || meal.toLowerCase().contains(this.dietaryPreference.toLowerCase());
+-            boolean safeFromAllergy = this.allergy == null || !meal.toLowerCase().contains(this.allergy.toLowerCase());
++        for (String meal : availableMeals) {
++            boolean matchesPreference = (this.dietaryPreference == null || meal.toLowerCase().contains(this.dietaryPreference.toLowerCase()));
++            boolean safeFromAllergy = (this.allergy == null || !meal.toLowerCase().contains(this.allergy.toLowerCase()));
+             if (matchesPreference && safeFromAllergy) {
+                 this.mealSuggestions.add(meal);
+             }
+         }
+-
+     }
+ 
+     public List<String> suggestPersonalizedMeals() {
+-        Map<String, Integer> mealFrequency = new HashMap();
+-        Iterator var2 = this.orderHistory.iterator();
++        Map<String, Integer> mealFrequency = new HashMap<>();  // تحديد النوع Map<String, Integer>
+ 
+-        while(var2.hasNext()) {
+-            String order = (String)var2.next();
+-            mealFrequency.put(order, (Integer)mealFrequency.getOrDefault(order, 0) + 1);
++        for (String order : this.orderHistory) {
++            mealFrequency.put(order, mealFrequency.getOrDefault(order, 0) + 1);
+         }
+ 
+-        List<String> personalizedSuggestions = new ArrayList();
+-        mealFrequency.entrySet().stream().sorted((e1, e2) -> {
+-            return ((Integer)e2.getValue()).compareTo((Integer)e1.getValue());
+-        }).limit(3L).forEach((e) -> {
+-            personalizedSuggestions.add((String)e.getKey());
+-        });
+-        return (List)(personalizedSuggestions.isEmpty() ? this.mealSuggestions : personalizedSuggestions);
+-    }
+-    
++        List<String> personalizedSuggestions = new ArrayList<>();
++        mealFrequency.entrySet().stream()
++                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
++                .limit(3)
++                .forEach(e -> personalizedSuggestions.add(e.getKey()));
++
++        return personalizedSuggestions.isEmpty() ? this.mealSuggestions : personalizedSuggestions;
++    }
+ 
+     public void addOrder(String meal) {
+         if (meal != null && !meal.trim().isEmpty()) {
+             this.orderHistory.add(meal);
+         }
+-
+     }
+ 
+     public void addMultipleOrders(List<String> meals) {
+         if (meals != null) {
+-            Iterator var2 = meals.iterator();
+-
+-            while(var2.hasNext()) {
+-                String meal = (String)var2.next();
++            for (String meal : meals) {
+                 this.addOrder(meal);
+             }
+         }
+-
+     }
+ 
+- 
+     public boolean hasAllergy(String ingredient) {
+         return this.allergy != null && ingredient != null && ingredient.toLowerCase().contains(this.allergy.toLowerCase());
+     }
+Index: src/main/java/model/Chef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\n\nimport java.time.LocalDateTime;\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class Chef {\n    private String name;\n    private List<String> expertise;\n    private List<Task> tasks = new ArrayList();\n    private List<String> notifications = new ArrayList();\n\n    public Chef(String name, List<String> expertise, int initialTasks) {\n        this.name = name;\n        this.expertise = expertise;\n\n        for(int i = 0; i < initialTasks; ++i) {\n            this.tasks.add(new Task(\"Task\" + i, (String)expertise.get(0)));\n        }\n\n    }\n\n    public void assignTask(Task task) {\n        this.tasks.add(task);\n        List var10000 = this.notifications;\n        String var10001 = task.getName();\n        var10000.add(\"New Task Assigned: \" + var10001 + (task.getDeadline() != null ? \" (Due: \" + String.valueOf(task.getDeadline()) + \")\" : \"\"));\n    }\n\n    public List<String> getExpertise() {\n        return this.expertise;\n    }\n\n    public int getWorkload() {\n        return this.tasks.size();\n    }\n\n    public List<Task> getTasks() {\n        return this.tasks;\n    }\n\n    public List<String> getNotifications() {\n        return this.notifications;\n    }\n\n    public Object getName() {\n        return this.name;\n    }\n\n    private LocalDateTime scheduledTaskTime; // لحفظ وقت المهمة\n\n    public void scheduleCookingTask(LocalDateTime taskTime) {\n        this.scheduledTaskTime = taskTime;\n    }\n\n    public LocalDateTime getScheduledTaskTime() {\n        return scheduledTaskTime;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/Chef.java b/src/main/java/model/Chef.java
+--- a/src/main/java/model/Chef.java	
++++ b/src/main/java/model/Chef.java	
+@@ -1,6 +1,5 @@
+ package model;
+ 
+-
+ import java.time.LocalDateTime;
+ import java.util.ArrayList;
+ import java.util.List;
+@@ -8,24 +7,22 @@
+ public class Chef {
+     private String name;
+     private List<String> expertise;
+-    private List<Task> tasks = new ArrayList();
+-    private List<String> notifications = new ArrayList();
++    private List<Task> tasks = new ArrayList<>();  // تحديد النوع List<Task>
++    private List<String> notifications = new ArrayList<>();  // تحديد النوع List<String>
+ 
+     public Chef(String name, List<String> expertise, int initialTasks) {
+         this.name = name;
+         this.expertise = expertise;
+ 
+-        for(int i = 0; i < initialTasks; ++i) {
+-            this.tasks.add(new Task("Task" + i, (String)expertise.get(0)));
++        for (int i = 0; i < initialTasks; ++i) {
++            this.tasks.add(new Task("Task" + i, expertise.get(0)));  // لا حاجة لتحويل expertise.get(0) إلى String
+         }
+-
+     }
+ 
+     public void assignTask(Task task) {
+         this.tasks.add(task);
+-        List var10000 = this.notifications;
+-        String var10001 = task.getName();
+-        var10000.add("New Task Assigned: " + var10001 + (task.getDeadline() != null ? " (Due: " + String.valueOf(task.getDeadline()) + ")" : ""));
++        this.notifications.add("New Task Assigned: " + task.getName() +
++                (task.getDeadline() != null ? " (Due: " + task.getDeadline() + ")" : ""));
+     }
+ 
+     public List<String> getExpertise() {
+@@ -44,7 +41,7 @@
+         return this.notifications;
+     }
+ 
+-    public Object getName() {
++    public String getName() {  // تعديل النوع إلى String
+         return this.name;
+     }
+ 
+Index: src/main/java/model/InventoryManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class InventoryManager {\n    private final Map<String, Integer> inventory = new HashMap<>();\n    private final Map<String, Integer> lowStockThresholds = new HashMap<>();\n    private final Map<String, Integer> criticalStockLevels = new HashMap<>();\n    private final Map<String, Supplier> supplierDetails = new HashMap<>();\n    private final List<String> managerNotifications = new ArrayList<>();\n\n    public InventoryManager() {\n        this.initializeSampleData();\n    }\n\n    private void initializeSampleData() {\n        this.inventory.put(\"Cheese\", 10);\n        this.inventory.put(\"Tomatoes\", 10);\n        this.lowStockThresholds.put(\"Cheese\", 5);\n        this.lowStockThresholds.put(\"Tomatoes\", 5);\n        this.criticalStockLevels.put(\"Cheese\", 2);\n        this.criticalStockLevels.put(\"Tomatoes\", 2);\n        this.supplierDetails.put(\"Cheese\", new Supplier(\"Cheese Supplier Inc.\", \"cheese@supplier.com\"));\n        this.supplierDetails.put(\"Tomatoes\", new Supplier(\"Tomato World\", \"tomato@supplier.com\"));\n    }\n\n    public boolean checkLowStockAndNotifyManager() {\n        boolean lowStockDetected = false;\n        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {\n            String ingredient = entry.getKey();\n            int quantity = entry.getValue();\n            int threshold = lowStockThresholds.getOrDefault(ingredient, 5);\n            if (quantity <= threshold) {\n                managerNotifications.add(\"Low stock alert: \" + ingredient + \" (Quantity: \" + quantity + \")\");\n                lowStockDetected = true;\n                System.out.println(\"Low stock detected for \" + ingredient + \": Quantity = \" + quantity + \", Threshold = \" + threshold);\n            }\n        }\n        if (!lowStockDetected) {\n            System.out.println(\"No ingredients below low stock threshold.\");\n        }\n        return lowStockDetected;\n    }\n\n    public Map<String, Integer> getInventory() {\n        return new HashMap<>(this.inventory);\n    }\n\n    public void setIngredientStock(String ingredient, int quantity) {\n        this.inventory.put(ingredient, quantity);\n        if (this.isRestockSuggested(ingredient)) {\n            this.managerNotifications.add(\"Low stock alert: \" + ingredient + \" (Quantity: \" + quantity + \")\");\n        }\n    }\n\n    public boolean isRestockSuggested(String ingredient) {\n        return this.inventory.getOrDefault(ingredient, 0) <= this.lowStockThresholds.getOrDefault(ingredient, 5);\n    }\n\n    public boolean isSupplierAPIConnected() {\n        return true;\n    }\n\n    public String fetchSupplierPrice(String ingredient) {\n        return this.supplierDetails.containsKey(ingredient) ? \"$\" + (10 + ingredient.length() % 5) + \".00\" : null;\n    }\n\n    public boolean hasSupplierFor(String ingredient) {\n        return this.supplierDetails.containsKey(ingredient);\n    }\n\n    public boolean checkAndAutoOrder(String ingredient) {\n        if (this.inventory.getOrDefault(ingredient, 0) < this.criticalStockLevels.getOrDefault(ingredient, 2) && this.hasSupplierFor(ingredient)) {\n            this.managerNotifications.add(\"Auto-order placed for: \" + ingredient);\n            return true;\n        } else {\n            return false;\n        }\n    }\n\n    public List<String> getManagerNotifications() {\n        return new ArrayList<>(this.managerNotifications);\n    }\n\n    public static class Supplier {\n        private String name;\n        private String email;\n\n        public Supplier(String name, String email) {\n            this.name = name;\n            this.email = email;\n        }\n\n        public String getName() {\n            return this.name;\n        }\n\n        public String getEmail() {\n            return this.email;\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/InventoryManager.java b/src/main/java/model/InventoryManager.java
+--- a/src/main/java/model/InventoryManager.java	
++++ b/src/main/java/model/InventoryManager.java	
+@@ -4,8 +4,11 @@
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
++import java.util.logging.Logger;
+ 
+ public class InventoryManager {
++    private static final Logger logger = Logger.getLogger(InventoryManager.class.getName());
++
+     private final Map<String, Integer> inventory = new HashMap<>();
+     private final Map<String, Integer> lowStockThresholds = new HashMap<>();
+     private final Map<String, Integer> criticalStockLevels = new HashMap<>();
+@@ -36,17 +39,17 @@
+             if (quantity <= threshold) {
+                 managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
+                 lowStockDetected = true;
+-                System.out.println("Low stock detected for " + ingredient + ": Quantity = " + quantity + ", Threshold = " + threshold);
++                logger.warning("Low stock detected for " + ingredient + ": Quantity = " + quantity + ", Threshold = " + threshold);
+             }
+         }
+         if (!lowStockDetected) {
+-            System.out.println("No ingredients below low stock threshold.");
++            logger.info("No ingredients below low stock threshold.");
+         }
+         return lowStockDetected;
+     }
+ 
+     public Map<String, Integer> getInventory() {
+-        return new HashMap<>(this.inventory);
++        return inventory;  // يمكن العودة بالخريطة مباشرة بما أن هذه خريطة ثابتة للقراءة فقط
+     }
+ 
+     public void setIngredientStock(String ingredient, int quantity) {
+@@ -102,4 +105,4 @@
+             return this.email;
+         }
+     }
+-}
+\ No newline at end of file
++}
+Index: src/main/java/model/NotificationService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport java.time.LocalDateTime;\n\npublic class NotificationService {\n    public boolean sendDeliveryReminder(CustomerProfile customer, LocalDateTime deliveryTime, LocalDateTime currentTime) {\n        if (customer == null || deliveryTime == null || currentTime == null) {\n            System.out.println(\"Invalid input: customer, deliveryTime, or currentTime is null\");\n            return false;\n        }\n        if (currentTime.isAfter(deliveryTime.minusHours(1))) {\n            System.out.println(\"Reminder sent to customer: \" + customer.getName() + \" about the delivery at \" + deliveryTime);\n            return true;\n        } else {\n            System.out.println(\"Reminder not sent: Current time \" + currentTime + \" is before reminder window for delivery at \" + deliveryTime);\n            return false;\n        }\n    }\n    /*public boolean sendDeliveryReminder(CustomerProfile customer, LocalDateTime deliveryTime) {\n        return sendDeliveryReminder(customer, deliveryTime, LocalDateTime.now());\n    }*/\n\n    public boolean notifyChefOfUpcomingTask(Chef chef, LocalDateTime currentTime) {\n        if (chef == null || currentTime == null || chef.getScheduledTaskTime() == null) {\n            System.out.println(\"Invalid input: chef, currentTime, or scheduledTaskTime is null\");\n            return false;\n        }\n        if (currentTime.isAfter(chef.getScheduledTaskTime().minusHours(1))) {\n            System.out.println(\"Notification sent to chef: \" + chef.getName() + \" to prepare the meal.\");\n            return true;\n        } else {\n            System.out.println(\"Chef notification not sent: Current time \" + currentTime + \" is before task window\");\n            return false;\n        }\n    }\n\n    public boolean notifyManagerOfLowStock(InventoryManager inventoryManager) {\n        if (inventoryManager == null) {\n            System.out.println(\"Invalid input: inventoryManager is null\");\n            return false;\n        }\n        return inventoryManager.checkLowStockAndNotifyManager();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/NotificationService.java b/src/main/java/model/NotificationService.java
+--- a/src/main/java/model/NotificationService.java	
++++ b/src/main/java/model/NotificationService.java	
+@@ -1,42 +1,46 @@
+ package model;
+ 
+ import java.time.LocalDateTime;
++import java.util.logging.Logger;
+ 
+ public class NotificationService {
++    // Logger for logging messages
++    private static final Logger logger = Logger.getLogger(NotificationService.class.getName());
++
++    // Method to send delivery reminder to the customer
+     public boolean sendDeliveryReminder(CustomerProfile customer, LocalDateTime deliveryTime, LocalDateTime currentTime) {
+         if (customer == null || deliveryTime == null || currentTime == null) {
+-            System.out.println("Invalid input: customer, deliveryTime, or currentTime is null");
++            logger.warning("Invalid input: customer, deliveryTime, or currentTime is null");
+             return false;
+         }
+         if (currentTime.isAfter(deliveryTime.minusHours(1))) {
+-            System.out.println("Reminder sent to customer: " + customer.getName() + " about the delivery at " + deliveryTime);
++            logger.info("Reminder sent to customer: " + customer.getName() + " about the delivery at " + deliveryTime);
+             return true;
+         } else {
+-            System.out.println("Reminder not sent: Current time " + currentTime + " is before reminder window for delivery at " + deliveryTime);
++            logger.info("Reminder not sent: Current time " + currentTime + " is before reminder window for delivery at " + deliveryTime);
+             return false;
+         }
+     }
+-    /*public boolean sendDeliveryReminder(CustomerProfile customer, LocalDateTime deliveryTime) {
+-        return sendDeliveryReminder(customer, deliveryTime, LocalDateTime.now());
+-    }*/
+ 
++    // Method to notify the chef about upcoming tasks
+     public boolean notifyChefOfUpcomingTask(Chef chef, LocalDateTime currentTime) {
+         if (chef == null || currentTime == null || chef.getScheduledTaskTime() == null) {
+-            System.out.println("Invalid input: chef, currentTime, or scheduledTaskTime is null");
++            logger.warning("Invalid input: chef, currentTime, or scheduledTaskTime is null");
+             return false;
+         }
+         if (currentTime.isAfter(chef.getScheduledTaskTime().minusHours(1))) {
+-            System.out.println("Notification sent to chef: " + chef.getName() + " to prepare the meal.");
++            logger.info("Notification sent to chef: " + chef.getName() + " to prepare the meal.");
+             return true;
+         } else {
+-            System.out.println("Chef notification not sent: Current time " + currentTime + " is before task window");
++            logger.info("Chef notification not sent: Current time " + currentTime + " is before task window");
+             return false;
+         }
+     }
+ 
++    // Method to notify the manager of low stock
+     public boolean notifyManagerOfLowStock(InventoryManager inventoryManager) {
+         if (inventoryManager == null) {
+-            System.out.println("Invalid input: inventoryManager is null");
++            logger.warning("Invalid input: inventoryManager is null");
+             return false;
+         }
+         return inventoryManager.checkLowStockAndNotifyManager();
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"20 (2)\" project-jdk-type=\"JavaSDK\" />\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -8,5 +8,5 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="20 (2)" project-jdk-type="JavaSDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20 (2)" project-jdk-type="JavaSDK" />
+ </project>
+\ No newline at end of file
