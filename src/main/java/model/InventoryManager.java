@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class InventoryManager {
+    private static final Logger logger = Logger.getLogger(InventoryManager.class.getName());
+
     private final Map<String, Integer> inventory = new HashMap<>();
     private final Map<String, Integer> lowStockThresholds = new HashMap<>();
     private final Map<String, Integer> criticalStockLevels = new HashMap<>();
@@ -36,17 +39,17 @@ public class InventoryManager {
             if (quantity <= threshold) {
                 managerNotifications.add("Low stock alert: " + ingredient + " (Quantity: " + quantity + ")");
                 lowStockDetected = true;
-                System.out.println("Low stock detected for " + ingredient + ": Quantity = " + quantity + ", Threshold = " + threshold);
+                logger.warning("Low stock detected for " + ingredient + ": Quantity = " + quantity + ", Threshold = " + threshold);
             }
         }
         if (!lowStockDetected) {
-            System.out.println("No ingredients below low stock threshold.");
+            logger.info("No ingredients below low stock threshold.");
         }
         return lowStockDetected;
     }
 
     public Map<String, Integer> getInventory() {
-        return new HashMap<>(this.inventory);
+        return inventory;  // يمكن العودة بالخريطة مباشرة بما أن هذه خريطة ثابتة للقراءة فقط
     }
 
     public void setIngredientStock(String ingredient, int quantity) {

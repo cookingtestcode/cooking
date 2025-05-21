@@ -1,4 +1,3 @@
-
 package model;
 
 import java.time.LocalDateTime;
@@ -12,8 +11,8 @@ public class CustomerProfile {
     private String name;
     private String dietaryPreference;
     private String allergy;
-    private List<String> mealSuggestions = new ArrayList();
-    private List<String> orderHistory = new ArrayList();
+    private List<String> mealSuggestions = new ArrayList<>();  // تحديد النوع List<String>
+    private List<String> orderHistory = new ArrayList<>();  // تحديد النوع List<String>
 
     public CustomerProfile() {
     }
@@ -52,58 +51,45 @@ public class CustomerProfile {
 
     public void generateMealSuggestions(List<String> availableMeals) {
         this.mealSuggestions.clear();
-        Iterator var2 = availableMeals.iterator();
-
-        while(var2.hasNext()) {
-            String meal = (String)var2.next();
-            boolean matchesPreference = this.dietaryPreference == null || meal.toLowerCase().contains(this.dietaryPreference.toLowerCase());
-            boolean safeFromAllergy = this.allergy == null || !meal.toLowerCase().contains(this.allergy.toLowerCase());
+        for (String meal : availableMeals) {
+            boolean matchesPreference = (this.dietaryPreference == null || meal.toLowerCase().contains(this.dietaryPreference.toLowerCase()));
+            boolean safeFromAllergy = (this.allergy == null || !meal.toLowerCase().contains(this.allergy.toLowerCase()));
             if (matchesPreference && safeFromAllergy) {
                 this.mealSuggestions.add(meal);
             }
         }
-
     }
 
     public List<String> suggestPersonalizedMeals() {
-        Map<String, Integer> mealFrequency = new HashMap();
-        Iterator var2 = this.orderHistory.iterator();
+        Map<String, Integer> mealFrequency = new HashMap<>();  // تحديد النوع Map<String, Integer>
 
-        while(var2.hasNext()) {
-            String order = (String)var2.next();
-            mealFrequency.put(order, (Integer)mealFrequency.getOrDefault(order, 0) + 1);
+        for (String order : this.orderHistory) {
+            mealFrequency.put(order, mealFrequency.getOrDefault(order, 0) + 1);
         }
 
-        List<String> personalizedSuggestions = new ArrayList();
-        mealFrequency.entrySet().stream().sorted((e1, e2) -> {
-            return ((Integer)e2.getValue()).compareTo((Integer)e1.getValue());
-        }).limit(3L).forEach((e) -> {
-            personalizedSuggestions.add((String)e.getKey());
-        });
-        return (List)(personalizedSuggestions.isEmpty() ? this.mealSuggestions : personalizedSuggestions);
+        List<String> personalizedSuggestions = new ArrayList<>();
+        mealFrequency.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .limit(3)
+                .forEach(e -> personalizedSuggestions.add(e.getKey()));
+
+        return personalizedSuggestions.isEmpty() ? this.mealSuggestions : personalizedSuggestions;
     }
-    
 
     public void addOrder(String meal) {
         if (meal != null && !meal.trim().isEmpty()) {
             this.orderHistory.add(meal);
         }
-
     }
 
     public void addMultipleOrders(List<String> meals) {
         if (meals != null) {
-            Iterator var2 = meals.iterator();
-
-            while(var2.hasNext()) {
-                String meal = (String)var2.next();
+            for (String meal : meals) {
                 this.addOrder(meal);
             }
         }
-
     }
 
- 
     public boolean hasAllergy(String ingredient) {
         return this.allergy != null && ingredient != null && ingredient.toLowerCase().contains(this.allergy.toLowerCase());
     }
