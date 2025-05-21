@@ -6,14 +6,13 @@ public class OrderAndMenu {
     private Menu menu;
     private CustomerProfile customerProfile;
     private Chef assignedChef;
-    private Set<AbstractMap.SimpleEntry<String, String>> incompatiblePairs = new HashSet<>();
-    private String restrictedIngredient;
+    private Map<String, Set<String>> incompatiblePairs = new HashMap<>();
     private String appliedSubstitutionDetails;
     private boolean substitutionApplied = false;
     private Set<String> selectedItems = Collections.synchronizedSet(new HashSet<>());
     private Set<String> availableIngredients = Collections.synchronizedSet(new HashSet<>());
     private Map<String, String> substitutions = Collections.synchronizedMap(new HashMap<>());
-
+    private String restrictedIngredient;
 
     public OrderAndMenu(Menu menu) {
         this.menu = menu;
@@ -75,7 +74,8 @@ public class OrderAndMenu {
     }
 
     public void addIncompatiblePair(String item1, String item2) {
-        incompatiblePairs.add(new AbstractMap.SimpleEntry<>(item1, item2));
+        incompatiblePairs.computeIfAbsent(item1, k -> new HashSet<>()).add(item2);
+        incompatiblePairs.computeIfAbsent(item2, k -> new HashSet<>()).add(item1);
     }
 
     public void setRestrictedIngredient(String ingredient) {
@@ -93,16 +93,15 @@ public class OrderAndMenu {
         if (original == null || substitute == null) {
             throw new IllegalArgumentException("Original and substitute ingredients cannot be null");
         }
-
         this.appliedSubstitutionDetails = original + " -> " + substitute;
         this.substitutionApplied = true;
 
-        if (chef != null) {
-            chef.getNotifications().add("Substitution Applied: " + this.appliedSubstitutionDetails);
-        } else {
+        if (chef == null) {
             throw new IllegalStateException("Chef must be assigned for substitution to be applied");
         }
+        chef.getNotifications().add("Substitution Applied: " + this.appliedSubstitutionDetails);
     }
+
     public String getSubstitutionDetails() {
         return appliedSubstitutionDetails;
     }
@@ -114,23 +113,23 @@ public class OrderAndMenu {
         if (ing1 == null || ing2 == null) {
             return false;
         }
-
         if (!this.availableIngredients.contains(ing1) || !this.availableIngredients.contains(ing2)) {
             return false;
         }
-        for (AbstractMap.SimpleEntry<String, String> pair : this.incompatiblePairs) {
-            if ((pair.getKey().equals(ing1) && pair.getValue().equals(ing2)) ||
-                    (pair.getKey().equals(ing2) && pair.getValue().equals(ing1))) {
+
+        for (Map.Entry<String, Set<String>> entry : incompatiblePairs.entrySet()) {
+            if (entry.getValue().contains(ing1) && entry.getValue().contains(ing2)) {
                 return false;
             }
         }
+
 
         if (this.customerProfile != null &&
                 (this.customerProfile.hasAllergy(ing1) || this.customerProfile.hasAllergy(ing2))) {
             return false;
         }
-
         return true;
     }
+
 
 }
