@@ -49,9 +49,7 @@ public class OrderANDMenu {
 
     @Given("a substitution of {string} for {string} has been applied")
     public void applySubstitution(String substitute, String original) {
-        // Ensure the substitution is added to the substitutions map first
         orderManager.addSubstitution(original, substitute);
-        // Apply the substitution using the orderManager's method
         orderManager.applySubstitution(original, substitute, chef);
     }
 
@@ -67,8 +65,7 @@ public class OrderANDMenu {
 
     @When("the meal is finalized")
     public void checkSubstitutionApplied() {
-        Assert.assertTrue("Substitution should be applied",
-                orderManager.isSubstitutionApplied());
+        Assert.assertTrue("Substitution should be applied", orderManager.isSubstitutionApplied());
     }
 
     @Then("the system should accept the meal as valid")
@@ -93,13 +90,12 @@ public class OrderANDMenu {
 
     @Then("the system should suggest {string}")
     public void verifySuggestedSubstitution(String expectedSubstitute) {
-        Assert.assertEquals("Suggested substitution should match",
-                expectedSubstitute, suggestedSubstitution);
+        Assert.assertEquals("Suggested substitution should match", expectedSubstitute, suggestedSubstitution);
     }
 
     @Then("the chef should be notified with the substitution details")
     public void verifyChefNotification() {
-        String substitutionDetails = orderManager.getSubstitutionDetails(); // Fetch from orderManager
+        String substitutionDetails = orderManager.getSubstitutionDetails(); 
         Assert.assertNotNull("Substitution details should not be null", substitutionDetails);
 
         String expectedNotification = "Substitution Applied: " + substitutionDetails;
