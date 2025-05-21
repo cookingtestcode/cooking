@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update" />
+    <list default="true" id="566f62f4-ec54-4a4a-8852-42b9a7884c9b" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STEP/OrderANDMenu.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +54,7 @@
     "Cucumber Java.Feature: Inventory_and_Supplier_Management.executor": "Run",
     "Cucumber Java.Feature: NotificationsandAlerts.executor": "Run",
     "Cucumber Java.Feature: OrderAndMenu.executor": "Run",
-    "JUnit.All in Cooking.executor": "Coverage",
+    "JUnit.All in Cooking.executor": "Run",
     "JUnit.STEP in Cooking.executor": "Coverage",
     "JUnit.TestRunner.executor": "Coverage",
     "JUnit.java in Cooking.executor": "Coverage",
