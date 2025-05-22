@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-
+@SuppressWarnings("all")
 public class Main {
     private static Menu restaurantMenu = new Menu();
     private static CustomerProfile customer = new CustomerProfile();
