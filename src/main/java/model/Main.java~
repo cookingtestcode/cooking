@@ -1,0 +1,523 @@
+package model;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Main {
+    private static Menu restaurantMenu = new Menu();
+    private static CustomerProfile customer = new CustomerProfile();
+    private static List<Chef> chefs = new ArrayList<>();
+    private static OrderAndMenu orderSystem;
+    private static InventoryManager inventoryManager;
+    private static BillingSystem billingSystem;
+    private static NotificationService notificationService;
+    private static Scanner scanner;
+    private static Map<String, Integer> itemRatings = new HashMap<>(); // Map to store item ratings
+
+    public static void main(String[] args) {
+        initializeSystem();
+
+        while (true) {
+            displayMainMenu();
+            int choice = getUserChoice();
+            switch (choice) {
+                case 1:
+                    manageCustomerProfile();
+                    break;
+                case 2:
+                    displayFilteredMenu();
+                    break;
+                case 3:
+                    manageOrder();
+                    break;
+                case 4:
+                    createCustomMeal();
+                    break;
+                case 5:
+                    viewChefNotifications();
+                    break;
+                case 6:
+                    manageInventory();
+                    break;
+                case 7:
+                    rateMenuItem();
+                    break;
+                case 8:
+                    manageSubstitutions();
+                    break;
+                case 9:
+                    viewOrderHistory();
+                    break;
+                case 10:
+                    processBillingAndReporting();
+                    break;
+                case 11:
+                    scheduleNotifications();
+                    break;
+                case 12:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void initializeSystem() {
+        chefs.add(new Chef("Chef Ali", Arrays.asList("Main", "Dessert"), 0));
+        chefs.add(new Chef("Chef Sara", Arrays.asList("Starter", "Main"), 0));
+        orderSystem = new OrderAndMenu(restaurantMenu);
+        orderSystem.setCustomerProfile(customer);
+        inventoryManager = new InventoryManager();
+        billingSystem = new BillingSystem(orderSystem);
+        notificationService = new NotificationService();
+        scanner = new Scanner(System.in);
+
+        // Initialize available ingredients for validation
+        orderSystem.setAvailableIngredients("Cheese", "Tomatoes", "Olive Oil", "Flour", "Pasta", "Eggs", "Milk", "Sugar", "Chocolate", "Nuts", "Vegan Cheese", "Seeds", "Almond Milk", "Flaxseed");
+
+        // Add sample incompatible ingredient pairs
+        orderSystem.addIncompatiblePair("Cheese", "Vegan Cheese");
+        orderSystem.addIncompatiblePair("Milk", "Almond Milk");
+    }
+
+    private static void displayMainMenu() {
+        System.out.println("\n=== Restaurant Management System ===");
+        System.out.println("1. Manage Customer Profile");
+        System.out.println("2. View Menu");
+        System.out.println("3. Manage Order");
+        System.out.println("4. Create Custom Meal");
+        System.out.println("5. View Chef Notifications");
+        System.out.println("6. Manage Inventory");
+        System.out.println("7. Rate Menu Item");
+        System.out.println("8. Manage Substitutions");
+        System.out.println("9. View Order History");
+        System.out.println("10. Process Billing and Reporting");
+        System.out.println("11. Schedule Notifications");
+        System.out.println("12. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    private static int getUserChoice() {
+        try {
+            return Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    private static void manageCustomerProfile() {
+        System.out.print("Enter customer name: ");
+        String name = scanner.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Name cannot be empty.");
+            return;
+        }
+        customer.setName(name);
+
+        System.out.print("Enter dietary preference (e.g., Vegetarian, Vegan) or press Enter to skip: ");
+        String dietary = scanner.nextLine().trim();
+        if (!dietary.isEmpty()) {
+            customer.setDietaryPreference(dietary);
+        }
+
+        System.out.print("Enter allergy (e.g., Nuts, Dairy) or press Enter to skip: ");
+        String allergy = scanner.nextLine().trim();
+        if (!allergy.isEmpty()) {
+            customer.setAllergy(allergy);
+        }
+
+        System.out.print("Enter meal delivery time (yyyy-MM-dd HH:mm) or press Enter to skip: ");
+        String deliveryTimeInput = scanner.nextLine().trim();
+        if (!deliveryTimeInput.isEmpty()) {
+            try {
+                LocalDateTime deliveryTime = LocalDateTime.parse(deliveryTimeInput, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                customer.scheduleMeal(deliveryTime);
+                System.out.println("Meal delivery scheduled for: " + deliveryTime);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Use yyyy-MM-dd HH:mm (e.g., 2025-05-21 18:00).");
+            }
+        }
+
+        System.out.println("Customer profile updated for " + customer.getName() + ".");
+    }
+
+    private static void displayFilteredMenu() {
+        System.out.println("\n=== Menu for " + (customer.getName() != null ? customer.getName() : "Guest") + " ===");
+        List<String> recommendedItems = restaurantMenu.getFilteredMenu(customer);
+
+        if (recommendedItems.isEmpty()) {
+            System.out.println("No items match the customer's preferences or allergies.");
+        } else {
+            System.out.println("Available Menu Items:");
+            for (String item : recommendedItems) {
+                System.out.printf("- %s ($%.2f)%n", item, restaurantMenu.getItemPrice(item));
+                System.out.println("  Ingredients: " + restaurantMenu.getItemIngredients(item));
+                System.out.println("  Category: " + restaurantMenu.getItemCategory(item));
+                System.out.println("  Dietary: " + (restaurantMenu.getDietaryTag(item) != null ? restaurantMenu.getDietaryTag(item) : "None"));
+                System.out.println();
+            }
+        }
+    }
+
+    private static void manageOrder() {
+        while (true) {
+            System.out.println("\n=== Order Management ===");
+            System.out.println("1. Add Item to Order");
+            System.out.println("2. Remove Item from Order");
+            System.out.println("3. View Current Order");
+            System.out.println("4. Confirm Order");
+            System.out.println("5. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+            int choice = getUserChoice();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter item name to add: ");
+                    String itemToAdd = scanner.nextLine().trim();
+                    if (orderSystem.addToOrder(itemToAdd)) {
+                        System.out.println(itemToAdd + " added to order.");
+                        assignTaskToChef(itemToAdd);
+                    } else {
+                        System.out.println("Item not found in menu or invalid input.");
+                    }
+                    break;
+                case 2:
+                    System.out.print("Enter item name to remove: ");
+                    String itemToRemove = scanner.nextLine().trim();
+                    if (orderSystem.removeFromOrder(itemToRemove)) {
+                        System.out.println(itemToRemove + " removed from order.");
+                    } else {
+                        System.out.println("Item not in order or invalid input.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Current Order: " + orderSystem.getCurrentOrder());
+                    System.out.printf("Total: $%.2f%n", orderSystem.calculateTotal());
+                    break;
+                case 4:
+                    if (orderSystem.getCurrentOrder().isEmpty()) {
+                        System.out.println("Order is empty. Add items before confirming.");
+                    } else {
+                        billingSystem.completeOrder();
+                        System.out.println("Order confirmed and added to history.");
+                        return;
+                    }
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void createCustomMeal() {
+        System.out.println("\n=== Create Custom Meal ===");
+        System.out.print("Enter meal name: ");
+        String mealName = scanner.nextLine().trim();
+        if (mealName.isEmpty()) {
+            System.out.println("Meal name cannot be empty.");
+            return;
+        }
+
+        System.out.print("Enter category (e.g., Main, Dessert, Starter): ");
+        String category = scanner.nextLine().trim();
+        if (category.isEmpty()) {
+            System.out.println("Category cannot be empty.");
+            return;
+        }
+
+        System.out.print("Enter dietary tag (e.g., Vegetarian, Vegan) or press Enter to skip: ");
+        String dietaryTag = scanner.nextLine().trim();
+        if (dietaryTag.isEmpty()) {
+            dietaryTag = null;
+        }
+
+        System.out.print("Enter price: ");
+        double price;
+        try {
+            price = Double.parseDouble(scanner.nextLine().trim());
+            if (price <= 0) {
+                System.out.println("Price must be positive.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid price. Meal creation cancelled.");
+            return;
+        }
+
+        List<String> ingredients = new ArrayList<>();
+        System.out.println("Enter ingredients (one per line, type 'done' to finish):");
+        while (true) {
+            String ingredient = scanner.nextLine().trim();
+            if (ingredient.equalsIgnoreCase("done")) {
+                if (ingredients.size() < 2) {
+                    System.out.println("Custom meal requires at least 2 ingredients.");
+                    return;
+                }
+                if (orderSystem.isValidMeal(ingredients.get(0), ingredients.get(1))) {
+                    restaurantMenu.addMenuItem(mealName, price, ingredients, category, dietaryTag);
+                    orderSystem.addToOrder(mealName);
+                    System.out.println("Custom meal " + mealName + " created and added to order.");
+                    assignTaskToChef(mealName);
+                } else {
+                    System.out.println("Invalid meal: incompatible ingredients or allergies detected.");
+                }
+                return;
+            }
+
+            if (inventoryManager.getInventory().containsKey(ingredient) && inventoryManager.getInventory().get(ingredient) > 0 && !customer.hasAllergy(ingredient)) {
+                ingredients.add(ingredient);
+            } else {
+                String substitute = suggestAutoSubstitution(ingredient);
+                if (substitute != null) {
+                    System.out.println("Ingredient " + ingredient + " unavailable or allergic. Suggested substitute: " + substitute);
+                    System.out.print("Use substitute? (y/n): ");
+                    if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
+                        ingredients.add(substitute);
+                    }
+                } else {
+                    System.out.println("Ingredient " + ingredient + " unavailable or allergic. Skipped.");
+                }
+            }
+        }
+    }
+
+    private static String suggestAutoSubstitution(String ingredient) {
+        String substitute = orderSystem.suggestSubstitution(ingredient);
+        if (substitute != null && inventoryManager.getInventory().containsKey(substitute) && inventoryManager.getInventory().get(substitute) > 0 && !customer.hasAllergy(substitute)) {
+            orderSystem.addSubstitution(ingredient, substitute);
+            return substitute;
+        }
+        return null;
+    }
+
+    private static void assignTaskToChef(String itemName) {
+        String category = restaurantMenu.getItemCategory(itemName);
+        Chef selectedChef = null;
+        int minWorkload = Integer.MAX_VALUE;
+
+        for (Chef chef : chefs) {
+            if (chef.getExpertise().contains(category) && chef.getWorkload() < minWorkload) {
+                selectedChef = chef;
+                minWorkload = chef.getWorkload();
+            }
+        }
+
+        if (selectedChef != null) {
+            orderSystem.assignChef(selectedChef);
+            Task task = new Task("Prepare " + itemName, category, LocalDateTime.now().plusHours(2));
+            selectedChef.assignTask(task);
+            selectedChef.scheduleCookingTask(task.getDeadline());
+            System.out.println("Task assigned to " + selectedChef.getName() + ": " + task.getName() + " (Due: " + task.getDeadline() + ")");
+        } else {
+            System.out.println("No suitable chef available for " + itemName);
+        }
+    }
+
+    private static void viewChefNotifications() {
+        System.out.println("\n=== Chef Notifications ===");
+        for (Chef chef : chefs) {
+            System.out.println("Notifications for " + chef.getName() + ":");
+            List<String> notifications = chef.getNotifications();
+            if (notifications.isEmpty()) {
+                System.out.println("  No notifications.");
+            } else {
+                for (String notification : notifications) {
+                    System.out.println("  - " + notification);
+                }
+            }
+        }
+    }
+
+    private static void manageInventory() {
+        System.out.println("\n=== Inventory Management ===");
+        System.out.println("Current Inventory: " + inventoryManager.getInventory());
+        System.out.println("1. Update Stock");
+        System.out.println("2. View Supplier Prices");
+        System.out.println("3. Check Low Stock");
+        System.out.print("Enter your choice: ");
+        int choice = getUserChoice();
+        if (choice == 1) {
+            System.out.print("Enter ingredient name to update stock: ");
+            String ingredient = scanner.nextLine().trim();
+            System.out.print("Enter new quantity: ");
+            try {
+                int quantity = Integer.parseInt(scanner.nextLine().trim());
+                if (quantity < 0) {
+                    System.out.println("Quantity cannot be negative.");
+                    return;
+                }
+                inventoryManager.setIngredientStock(ingredient, quantity);
+                System.out.println("Stock updated for " + ingredient + ": " + quantity);
+                if (inventoryManager.checkAndAutoOrder(ingredient)) {
+                    System.out.println("Auto-order placed for " + ingredient + " from supplier: " + inventoryManager.fetchSupplierPrice(ingredient));
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid quantity. Please enter a number.");
+            }
+        } else if (choice == 2) {
+            System.out.print("Enter ingredient name to check supplier price: ");
+            String ingredient = scanner.nextLine().trim();
+            String price = inventoryManager.fetchSupplierPrice(ingredient);
+            if (price != null) {
+                System.out.println("Supplier price for " + ingredient + ": " + price);
+            } else {
+                System.out.println("No supplier available for " + ingredient);
+            }
+        } else if (choice == 3) {
+            notificationService.notifyManagerOfLowStock(inventoryManager);
+            System.out.println("Manager Notifications: " + inventoryManager.getManagerNotifications());
+        } else {
+            System.out.println("Invalid choice.");
+        }
+    }
+
+    private static void rateMenuItem() {
+        System.out.print("Enter menu item name to rate: ");
+        String itemName = scanner.nextLine().trim();
+        if (!restaurantMenu.getAllMenuItems().containsKey(itemName)) {
+            System.out.println("Item not found in menu.");
+            return;
+        }
+        System.out.print("Enter rating (1-5): ");
+        try {
+            int rating = Integer.parseInt(scanner.nextLine().trim());
+            if (rating >= 1 && rating <= 5) {
+                itemRatings.put(itemName, rating); // Store rating in itemRatings map
+                System.out.println("Rating recorded for " + itemName + ": " + rating);
+            } else {
+                System.out.println("Rating must be between 1 and 5.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid rating. Please enter a number.");
+        }
+    }
+
+    private static void manageSubstitutions() {
+        System.out.println("\n=== Substitution Management ===");
+        System.out.print("Enter original ingredient: ");
+        String original = scanner.nextLine().trim();
+        System.out.print("Enter substitute ingredient: ");
+        String substitute = scanner.nextLine().trim();
+        if (original.isEmpty() || substitute.isEmpty()) {
+            System.out.println("Ingredients cannot be empty.");
+            return;
+        }
+        orderSystem.addSubstitution(original, substitute);
+        System.out.println("Substitution added: " + original + " -> " + substitute);
+        System.out.print("Apply substitution now? (y/n): ");
+        if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
+            Chef selectedChef = chefs.isEmpty() ? null : chefs.get(0);
+            if (selectedChef != null) {
+                try {
+                    orderSystem.applySubstitution(original, substitute, selectedChef);
+                    System.out.println("Substitution applied: " + orderSystem.getSubstitutionDetails());
+                } catch (IllegalArgumentException | IllegalStateException e) {
+                    System.out.println("Error applying substitution: " + e.getMessage());
+                }
+            } else {
+                System.out.println("No chefs available to apply substitution.");
+            }
+        }
+    }
+
+    private static void viewOrderHistory() {
+        System.out.println("\n=== Order History for " + (customer.getName() != null ? customer.getName() : "Guest") + " ===");
+        List<String> history = customer.getOrderHistory();
+        if (history.isEmpty()) {
+            System.out.println("No orders in history.");
+        } else {
+            for (String order : history) {
+                String ratingInfo = itemRatings.containsKey(order) ? " (Rated: " + itemRatings.get(order) + ")" : "";
+                System.out.println("- " + order + ratingInfo);
+            }
+        }
+
+        System.out.println("\nPersonalized Suggestions:");
+        customer.generateMealSuggestions(new ArrayList<>(restaurantMenu.getAllMenuItems().keySet()));
+        List<String> suggestions = customer.suggestPersonalizedMeals();
+        List<String> filteredSuggestions = new ArrayList<>();
+        for (String suggestion : suggestions) {
+            if (!itemRatings.containsKey(suggestion) || itemRatings.get(suggestion) >= 3) {
+                filteredSuggestions.add(suggestion);
+            }
+        }
+        if (filteredSuggestions.isEmpty()) {
+            System.out.println("No suggestions available.");
+        } else {
+            for (String suggestion : filteredSuggestions) {
+                System.out.println("- " + suggestion);
+            }
+        }
+    }
+
+    private static void processBillingAndReporting() {
+        System.out.println("\n=== Process Billing and Reporting ===");
+        System.out.println("Generating invoices for all completed orders:");
+        List<BillingSystem.Invoice> invoices = billingSystem.getInvoices();
+        if (invoices.isEmpty()) {
+            System.out.println("No invoices available.");
+        } else {
+            for (BillingSystem.Invoice invoice : invoices) {
+                System.out.println(invoice);
+            }
+        }
+
+        System.out.println("\nGenerating financial report:");
+        BillingSystem.FinancialReport report = billingSystem.generateFinancialReport();
+        System.out.println(report);
+    }
+
+    private static void scheduleNotifications() {
+        System.out.println("\n=== Schedule Notifications ===");
+        System.out.print("Enter current time for notifications (yyyy-MM-dd HH:mm) or press Enter for now: ");
+        String timeInput = scanner.nextLine().trim();
+        LocalDateTime currentTime = timeInput.isEmpty() ? LocalDateTime.now() : parseDateTime(timeInput);
+
+        if (currentTime == null) {
+            System.out.println("Invalid date format. Notifications cancelled.");
+            return;
+        }
+
+        // Notify customer about delivery
+        if (customer.getMealDeliveryTime() != null) {
+            boolean sent = notificationService.sendDeliveryReminder(customer, customer.getMealDeliveryTime(), currentTime);
+            if (sent) {
+                System.out.println("Customer delivery reminder processed.");
+            }
+        }
+
+        // Notify chefs about upcoming tasks
+        for (Chef chef : chefs) {
+            if (chef.getScheduledTaskTime() != null) {
+                boolean sent = notificationService.notifyChefOfUpcomingTask(chef, currentTime);
+                if (sent) {
+                    System.out.println("Chef " + chef.getName() + " notified of upcoming task.");
+                }
+            }
+        }
+
+        // Notify manager of low stock
+        boolean lowStock = notificationService.notifyManagerOfLowStock(inventoryManager);
+        if (lowStock) {
+            System.out.println("Manager notified of low stock.");
+        }
+    }
+
+    private static LocalDateTime parseDateTime(String input) {
+        try {
+            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+}
